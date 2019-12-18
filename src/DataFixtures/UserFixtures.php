@@ -15,13 +15,14 @@ class UserFixtures extends Fixture
         $user->setUsername('user');
         $user->setEmail('user@localhost');
         $user->setPassword('user');
-
+        
         $manager->persist($user);
 
         $userAdmin = new User();
         $userAdmin->setUsername('admin');
         $userAdmin->setEmail('admin@localhost');
         $userAdmin->setPassword('admin');
+        $userAdmin->setRoles(["ROLE_ADMIN"]);
 
         $manager->persist($userAdmin);
         $manager->flush();
