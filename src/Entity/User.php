@@ -33,6 +33,26 @@ class User
      */
     private $password;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Customer", inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $customer;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Merchant", inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $merchant;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Seller", inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $seller;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,4 +93,50 @@ class User
 
         return $this;
     }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getMerchant(): ?Merchant
+    {
+        return $this->merchant;
+    }
+
+    public function setMerchant(?Merchant $merchant): self
+    {
+        $this->merchant = $merchant;
+
+        return $this;
+    }
+
+    public function getSeller(): ?Seller
+    {
+        return $this->seller;
+    }
+
+    public function setSeller(?Seller $seller): self
+    {
+        $this->seller = $seller;
+
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
 }
