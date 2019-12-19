@@ -11,6 +11,16 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+    user.listener:
+        class: App\EventListener\UserListener
+        arguments: [ "@security.password_encoder" ]
+        tags:
+            -
+                name: 'doctrine.orm.entity_listener'
+                # this is the only required option for the lifecycle listener tag
+                event: 'prePersist'
+                entity: 'App\Entity\User'
+                lazy: true
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
@@ -23,5 +33,14 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+
+    # user_listener:
+    #     class: \App\UserListener
+    #     tags:
+    #         -
+    #             name: doctrine.orm.entity_listener
+    #             event: prePersist
+    #             entity: App\Entity\User
+                # entity_manager attribute is optional
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
