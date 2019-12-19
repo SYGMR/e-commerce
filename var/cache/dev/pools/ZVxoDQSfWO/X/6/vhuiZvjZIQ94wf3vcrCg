@@ -1,0 +1,27 @@
+<?php //%255BApp%255CEntity%255CMerchant%2524shop%255D%255B1%255D
+
+namespace Symfony\Component\VarExporter\Internal;
+
+return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
+    $o = [
+        clone (Registry::$prototypes['Doctrine\\ORM\\Mapping\\OneToMany'] ?? Registry::p('Doctrine\\ORM\\Mapping\\OneToMany')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'mappedBy' => [
+                'merchant',
+            ],
+            'targetEntity' => [
+                'App\\Entity\\Shop',
+            ],
+            'orphanRemoval' => [
+                true,
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+);
