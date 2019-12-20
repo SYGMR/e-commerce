@@ -16,7 +16,7 @@ class Product
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
