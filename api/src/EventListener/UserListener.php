@@ -1,5 +1,4 @@
 <?php
-// src/EventListener/UserChangedNotifier.php
 namespace App\EventListener;
 
 use App\Entity\User;
