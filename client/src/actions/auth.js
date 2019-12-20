@@ -1,14 +1,13 @@
 import jwtDecode from 'jwt-decode';
 import {SubmissionError} from 'redux-form';
 
-import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
-import {saveAuthToken, clearAuthToken} from '../local-storage';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
-export const setAuthToken = authToken => ({
+export const setAuthToken = (token, refreshToken) => ({
 	type: SET_AUTH_TOKEN,
-	authToken
+	token,
+	refreshToken
 });
 
 export const CLEAR_AUTH = 'CLEAR_AUTH';
@@ -35,17 +34,18 @@ export const authError = error => ({
 
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
-const storeAuthInfo = (authToken, dispatch) => {
-	const decodedToken = jwtDecode(authToken);
-	dispatch(setAuthToken(authToken));
-	dispatch(authSuccess(decodedToken.user));
-	saveAuthToken(authToken);
+const storeAuthInfo = (token, refreshToken, dispatch) => {
+	const decodedToken = jwtDecode(token);
+	dispatch(setAuthToken(token, refreshToken));
+	dispatch(authSuccess(decodedToken));
+	localStorage.setItem("token", token)
+	localStorage.setItem("refresh_token", refreshToken)
 };
 
 export const login = (email, password) => dispatch => {
 	dispatch(authRequest());
 	return (
-		fetch(`${API_BASE_URL}/authentication_token`, {
+		fetch(`${process.env.REACT_APP_AUTH_BASE_URL}/login`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ export const login = (email, password) => dispatch => {
 			// errors which follow a consistent format
 			.then(res => normalizeResponseErrors(res))
 			.then(res => res.json())
-			.then(({token}) => storeAuthInfo(token, dispatch))
+			.then(({token, refresh_token}) => storeAuthInfo(token, refresh_token, dispatch))
 			.catch(err => {
 				const {code} = err;
 				const message =
@@ -80,23 +80,27 @@ export const login = (email, password) => dispatch => {
 
 export const refreshAuthToken = () => (dispatch, getState) => {
 	dispatch(authRequest());
-	const authToken = getState().auth.authToken;
-	return fetch(`${API_BASE_URL}/auth/refresh`, {
+	const token = getState().auth.refreshToken;
+	return fetch(`${process.env.REACT_APP_AUTH_BASE_URL}/refresh`, {
 		method: 'POST',
 		headers: {
-			// Provide our existing token as credentials to get a new one
-			Authorization: `Bearer ${authToken}`
-		}
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			refresh_token: token
+		})
 	})
 		.then(res => normalizeResponseErrors(res))
 		.then(res => res.json())
-		.then(({authToken}) => storeAuthInfo(authToken, dispatch))
+		.then(({token, refresh_token}) => storeAuthInfo(token, refresh_token, dispatch))
 		.catch(err => {
+			// TODO
+			console.error(err)
 			// We couldn't get a refresh token because our current credentials
 			// are invalid or expired, or something else went wrong, so clear
 			// them and sign us out
 			dispatch(authError(err));
 			dispatch(clearAuth());
-			clearAuthToken(authToken);
+			localStorage.removeItem("token")
 		});
 };

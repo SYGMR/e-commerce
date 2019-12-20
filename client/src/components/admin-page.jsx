@@ -2,7 +2,7 @@ import React from 'react';
 import { HydraAdmin, ResourceGuesser } from '@api-platform/admin';
 
 export default () => (
-	<HydraAdmin entrypoint={process.env.REACT_APP_API_ENTRYPOINT}>
+	<HydraAdmin entrypoint={process.env.REACT_APP_API_BASE_URL}>
 		<ResourceGuesser name="carts" />
 		<ResourceGuesser name="cart_items" />
 		<ResourceGuesser name="categories" />

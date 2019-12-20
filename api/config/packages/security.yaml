@@ -16,6 +16,10 @@ security:
         dev:
             pattern: ^/_(profiler|wdt)
             security: false
+        refresh:
+            pattern:  ^/auth/refresh
+            stateless: true
+            anonymous: true
         api:
             pattern: ^/api/
             stateless: true
@@ -27,8 +31,14 @@ security:
         main:
             anonymous: true
             json_login:
-                check_path: /authentication_token
+                check_path: /auth/login
                 username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+    access_control:
+    # ...
+        - { path: ^/auth/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    # - { path: ^/protected,       roles: IS_AUTHENTICATED_FULLY }
+    # ...
