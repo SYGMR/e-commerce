@@ -30,6 +30,7 @@ security:
                     - lexik_jwt_authentication.jwt_token_authenticator
         main:
             anonymous: true
+            provider: app_user_provider
             json_login:
                 check_path: /auth/login
                 username_path: email

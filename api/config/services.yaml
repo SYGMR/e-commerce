@@ -10,7 +10,6 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
     user.listener:
         class: App\EventListener\UserListener
         arguments: [ "@security.password_encoder" ]
@@ -21,7 +20,6 @@ services:
                 event: 'prePersist'
                 entity: 'App\Entity\User'
                 lazy: true
-                
     acme_api.event.jwt_created_listener:
         class: App\EventListener\JWTCreatedListener
         arguments: [ '@request_stack' ]
