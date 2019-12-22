@@ -4,6 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@api-platform/admin": "^1.0.2",
+		"@material-ui/icons": "^4.5.1",
 		"babel-jest": "^24.9.0",
 		"bootstrap": "^4.1.3",
 		"connected-react-router": "^5.0.1",
