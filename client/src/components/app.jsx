@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Route, withRouter} from 'react-router-dom';
+import {Route, withRouter, Switch} from 'react-router-dom';
 
 import HeaderBar from './header-bar';
 import LandingPage from './landing-page';
@@ -42,14 +42,19 @@ export class App extends React.Component {
 
 		render() {
 				return (
-						<div className="app">
+						<Switch>
+							<Route exact path="/admin" component={AdminPage} />
+							<React.Fragment>
 								<HeaderBar />
-								<Route exact path="/" component={LandingPage} />
-								<Route exact path="/dashboard" component={Dashboard} />
-								<Route exact path="/register" component={RegistrationPage} />
-								<Route exact path="/login" component={LoginPage} />
-								<Route exact path="/admin" component={AdminPage} />
-						</div>
+								<Switch>
+									<Route exact path="/" component={LandingPage} />
+									<Route exact path="/dashboard" component={Dashboard} />
+									<Route exact path="/register" component={RegistrationPage} />
+									<Route exact path="/login" component={LoginPage} />
+									<Route><div>404 Not found</div></Route>
+								</Switch>
+							</React.Fragment>
+						</Switch>
 				);
 		}
 }

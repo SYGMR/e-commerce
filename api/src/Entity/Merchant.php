@@ -13,113 +13,114 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Merchant
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+	/**
+	 * @ORM\Id()
+	 * @ORM\GeneratedValue()
+	 * @ORM\Column(type="integer")
+	 */
+	private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+	/**
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $address;
+	/**
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $address;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="merchant", cascade={"persist", "remove"})
-     */
-    private $user;
+	/**
+	 * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="merchant", cascade={"persist", "remove"})
+	 */
+	private $user;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Shop", mappedBy="merchant", orphanRemoval=true)
-     */
-    private $shop;
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\Shop", mappedBy="merchant", orphanRemoval=true)
+	 */
+	private $shop;
 
-    public function __construct()
-    {
-        $this->shop = new ArrayCollection();
-    }
+	public function __construct()
+	{
+		$this->shop = new ArrayCollection();
+	}
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
+	public function setName(string $name): self
+	{
+		$this->name = $name;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
+	public function getAddress(): ?string
+	{
+		return $this->address;
+	}
 
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
+	public function setAddress(string $address): self
+	{
+		$this->address = $address;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
+	public function getUser(): ?User
+	{
+		return $this->user;
+	}
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
+	public function setUser(?User $user): self
+	{
+		$this->user = $user;
 
-        // set (or unset) the owning side of the relation if necessary
-        $newMerchant = null === $user ? null : $this;
-        if ($user->getMerchant() !== $newMerchant) {
-            $user->setMerchant($newMerchant);
-        }
+		// set (or unset) the owning side of the relation if necessary
+		$newMerchant = null === $user ? null : $this;
+		if ($user->getMerchant() !== $newMerchant) {
+			$user->setMerchant($newMerchant);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * @return Collection|Shop[]
-     */
-    public function getShop(): Collection
-    {
-        return $this->shop;
-    }
+	/**
+	 * @return Collection|Shop[]
+	 */
+	public function getShop(): Collection
+	{
+		return $this->shop;
+	}
 
-    public function addShop(Shop $shop): self
-    {
-        if (!$this->shop->contains($shop)) {
-            $this->shop[] = $shop;
-            $shop->setMerchant($this);
-        }
+	public function addShop(Shop $shop): self
+	{
+		if (!$this->shop->contains($shop)) {
+			$this->shop[] = $shop;
+			$shop->setMerchant($this);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function removeShop(Shop $shop): self
-    {
-        if ($this->shop->contains($shop)) {
-            $this->shop->removeElement($shop);
-            // set the owning side to null (unless already changed)
-            if ($shop->getMerchant() === $this) {
-                $shop->setMerchant(null);
-            }
-        }
+	public function removeShop(Shop $shop): self
+	{
+		if ($this->shop->contains($shop)) {
+			$this->shop->removeElement($shop);
+			// set the owning side to null (unless already changed)
+			if ($shop->getMerchant() === $this) {
+				$shop->setMerchant(null);
+			}
+		}
 
-        return $this;
-    }
+		return $this;
+	}
+
 }
