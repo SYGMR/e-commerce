@@ -37,8 +37,8 @@ export const Create = props => (
 export const Edit = props => (
 	<EditGuesser {...props}>
 		<ReferenceInput
-			source="product"
-			reference="products"
+			source="customer"
+			reference="customers"
 			filterToQuery={searchText => ({ name: searchText })}
 		>
 			<AutocompleteInput optionText="name" />
