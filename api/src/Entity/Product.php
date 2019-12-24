@@ -49,63 +49,69 @@ class Product
 	 */
 	private $images = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CartItem", mappedBy="product", orphanRemoval=true)
+     */
+    private $cartItems;
+
 	public function __construct()
-	{
-		$this->sellerItems = new ArrayCollection();
-	}
+               	{
+               		$this->sellerItems = new ArrayCollection();
+                 $this->cartItems = new ArrayCollection();
+               	}
 
 	public function getId(): ?int
-	{
-		return $this->id;
-	}
+               	{
+               		return $this->id;
+               	}
 
 	public function getName(): ?string
-	{
-		return $this->name;
-	}
+               	{
+               		return $this->name;
+               	}
 
 	public function setName(string $name): self
-	{
-		$this->name = $name;
- 
-		return $this;
-	}
+               	{
+               		$this->name = $name;
+                
+               		return $this;
+               	}
 
 	public function getDescription(): ?string
-	{
-		return $this->description;
-	}
+               	{
+               		return $this->description;
+               	}
 
 	public function setDescription(string $description): self
-					{
-						$this->description = $description;
-				 
-						return $this;
-					}
+               					{
+               						$this->description = $description;
+               				 
+               						return $this;
+               					}
 
 	public function getPrice(): ?float
-					{
-						return $this->price;
-					}
+               					{
+               						return $this->price;
+               					}
 
 	public function setPrice(float $price): self
-					{
-						$this->price = $price;
-				 
-						return $this;
-					}
+               					{
+               						$this->price = $price;
+               				 
+               						return $this;
+               					}
 
 	public function getCategory(): ?Category
-					{
-						return $this->category;
-					}
+               					{
+               						return $this->category;
+               					}
 
 	public function setCategory(?Category $category): self
-					{
-						$this->category = $category;
-				 
-						return $this;
-					}
+               					{
+               						$this->category = $category;
+               				 
+               						return $this;
+               					}
 
 		public function getImages(): ?array
 		{
@@ -118,5 +124,36 @@ class Product
 
 				return $this;
 		}
+
+  /**
+   * @return Collection|CartItem[]
+   */
+  public function getCartItems(): Collection
+  {
+      return $this->cartItems;
+  }
+
+  public function addCartItem(CartItem $cartItem): self
+  {
+      if (!$this->cartItems->contains($cartItem)) {
+          $this->cartItems[] = $cartItem;
+          $cartItem->setProduct($this);
+      }
+
+      return $this;
+  }
+
+  public function removeCartItem(CartItem $cartItem): self
+  {
+      if ($this->cartItems->contains($cartItem)) {
+          $this->cartItems->removeElement($cartItem);
+          // set the owning side to null (unless already changed)
+          if ($cartItem->getProduct() === $this) {
+              $cartItem->setProduct(null);
+          }
+      }
+
+      return $this;
+  }
 
 }

@@ -9,7 +9,8 @@ import {
 	TextInput,
 	AutocompleteArrayInput ,
 	SelectArrayInput,
-	ReferenceFieldController
+	ReferenceFieldController,
+	FunctionField
 } from "react-admin";
 
 import { 
@@ -29,20 +30,7 @@ export const Edit = props => (
 
 export const Create = props => (
 	<CreateGuesser {...props}>
-		 <ReferenceFieldController label="Customer" reference="customer" source="customer" linkType={false}>
-			{({referenceRecord, ...props}) => (
-				<ReferenceField basePath="/customer" resource="customer" reference="customer" record={referenceRecord || {}} linkType="show">
-					<TextField source="name" />
-				</ReferenceField>
-			)}
-		</ReferenceFieldController>
-		<ReferenceInput
-			source="product"
-			reference="products"
-			filterToQuery={searchText => ({ name: searchText })}
-		>
-			<AutocompleteInput optionText="name" />
-		</ReferenceInput>
+		
 	</CreateGuesser>
 );
 
