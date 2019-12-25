@@ -14,22 +14,28 @@ export class HeaderBar extends React.Component {
 		// Only render the log out button if we are logged in
 		return (
 			<div className="header-bar">
-				<h1>Foo App</h1>
-				{this.props.loggedIn === false ?
-					<ul>
+				<h1>Univershop</h1>
+				<ul>
+				{this.props.currentUser === null ?
+					<>
 						<li><Link to="/register">Register</Link></li>
 						<li><Link to="/login">Login</Link></li>
-					</ul>
-				: 
-					<button onClick={() => this.logOut()}>Log out</button> 
+					</>
+				: [
+					this.props.currentUser.roles.includes("ROLE_ADMIN") && (
+						<li><Link to="/admin">Admin</Link></li>
+					),
+					<li><button onClick={() => this.logOut()}>Log out</button></li>
+				 ]
 				}
+				</ul>
 			</div>
 		);
 	}
 }
 
 const mapStateToProps = state => ({
-	loggedIn: state.auth.currentUser !== null
+	currentUser: state.auth.currentUser
 });
 
 export default connect(mapStateToProps)(HeaderBar);

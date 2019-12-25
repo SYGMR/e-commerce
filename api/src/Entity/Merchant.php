@@ -6,9 +6,20 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={"security"="is_granted('ROLE_USER')"},
+ *     collectionOperations={
+ *         "get",
+ *         "post"={"security"="is_granted('ROLE_ADMIN')"}
+ *     },
+ *     itemOperations={
+ *         "get",
+ *         "put"={"security"="is_granted('ROLE_ADMIN') or object.user == user"},
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\MerchantRepository")
  */
 class Merchant
@@ -32,11 +43,13 @@ class Merchant
 
 	/**
 	 * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="merchant", cascade={"persist", "remove"})
+	 * @ApiSubresource
 	 */
 	private $user;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="App\Entity\Shop", mappedBy="merchant", orphanRemoval=true)
+	 * @ApiSubresource
 	 */
 	private $shop;
 

@@ -6,9 +6,20 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={"security"="is_granted('ROLE_USER')"},
+ *     collectionOperations={
+ *         "get",
+ *         "post"={"security"="is_granted('ROLE_ADMIN')"}
+ *     },
+ *     itemOperations={
+ *         "get",
+ *         "put"={"security"="is_granted('ROLE_ADMIN') or object.user == user"},
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
  */
 class Customer
@@ -38,11 +49,13 @@ class Customer
 
 	/**
 	 * @ORM\OneToOne(targetEntity="App\Entity\Cart", mappedBy="customer", cascade={"persist", "remove"})
+	 * @ApiSubresource
 	 */
 	private $cart;
 
 	/**
 	 * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+	 * @ApiSubresource
 	 */
 	private $user;
 
