@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-	ReferenceInput, 
+/*	ReferenceInput, 
 	ReferenceField, 
 	TextField, 
 	AutocompleteInput,
@@ -10,16 +10,16 @@ import {
 	AutocompleteArrayInput ,
 	SelectArrayInput,
 	ReferenceFieldController,
-	FunctionField
+	FunctionField*/
 } from "react-admin";
 
 import { 
 	ListGuesser,
 	CreateGuesser,
-	FieldGuesser,
 	EditGuesser,
-	InputGuesser,
 	ShowGuesser
+/*	InputGuesser,*/
+/*	FieldGuesser,*/
  } from '@api-platform/admin';
 
 export const Edit = props => (

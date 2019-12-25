@@ -7,10 +7,6 @@ import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 
-import LoginPage from './login-page';
-
-import store from '../store'
-
 import { 
 	HydraAdmin, 
 	ResourceGuesser,
@@ -30,8 +26,7 @@ import {
 	RecordVoiceOver, 
 	FormatListBulleted, 
 	Store, 
-	GridOn, 
-	Star 
+	GridOn
 } from '@material-ui/icons';
 
 import * as Carts from './admin/carts';

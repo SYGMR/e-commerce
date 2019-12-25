@@ -2,23 +2,24 @@ import React from 'react';
 import { 
 	ReferenceInput, 
 	ReferenceField, 
-	TextField, 
 	AutocompleteInput,
+	TextField, 
+/*	
 	ArrayInput,
 	SimpleFormIterator,
 	TextInput,
 	AutocompleteArrayInput ,
 	SelectArrayInput,
-	ReferenceFieldController
+	ReferenceFieldController*/
 } from "react-admin";
 
 import { 
 	ListGuesser,
 	CreateGuesser,
-	FieldGuesser,
+	ShowGuesser,
 	EditGuesser,
-	InputGuesser,
-	ShowGuesser
+/*	InputGuesser,
+	FieldGuesser,*/
  } from '@api-platform/admin';
 
 
