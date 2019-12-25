@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ApiResource()
@@ -21,6 +22,7 @@ class CartItem
 	/**
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Cart", inversedBy="cartItems")
 	 * @ORM\JoinColumn(nullable=false)
+	 * @ApiSubresource
 	 */
 	private $cart;
 
@@ -29,50 +31,51 @@ class CartItem
 	 */
 	private $quantity;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="cartItems")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $product;
+	/**
+	* @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="cartItems")
+	* @ORM\JoinColumn(nullable=false)
+	* @ApiSubresource
+	*/
+	private $product;
 
 	public function getId(): ?int
-         	{
-         		return $this->id;
-         	}
+	{
+		return $this->id;
+	}
 
 	public function getCart(): ?Cart
-         	{
-         		return $this->cart;
-         	}
+	{
+		return $this->cart;
+	}
 
 	public function setCart(?Cart $cart): self
-         	{
-         		$this->cart = $cart;
-         
-         		return $this;
-         	}
+	{
+		$this->cart = $cart;
+
+		return $this;
+	}
 
 	public function getQuantity(): ?int
-         	{
-         		return $this->quantity;
-         	}
+	{
+		return $this->quantity;
+	}
 
 	public function setQuantity(int $quantity): self
-         	{
-         		$this->quantity = $quantity;
-         
-         		return $this;
-         	}
+	{
+		$this->quantity = $quantity;
 
-    public function getProduct(): ?Product
-    {
-        return $this->product;
-    }
+		return $this;
+	}
 
-    public function setProduct(?Product $product): self
-    {
-        $this->product = $product;
+	public function getProduct(): ?Product
+	{
+		return $this->product;
+	}
 
-        return $this;
-    }
+	public function setProduct(?Product $product): self
+	{
+		$this->product = $product;
+
+		return $this;
+	}
 }

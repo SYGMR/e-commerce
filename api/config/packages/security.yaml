@@ -41,5 +41,5 @@ security:
     # ...
         - { path: ^/auth/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    # - { path: ^/protected,       roles: IS_AUTHENTICATED_FULLY }
+        # - { path: ^/protected, roles: IS_AUTHENTICATED_FULLY }
     # ...

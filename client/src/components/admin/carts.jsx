@@ -48,7 +48,6 @@ export const Edit = props => (
 
 export const Show = props => (
 	<ShowGuesser {...props}>
-		<FieldGuesser source="id" addLabel={true} />
 		<ReferenceField
 			source="customer"
 			reference="customers"
@@ -61,11 +60,9 @@ export const Show = props => (
 
 export const List = props => (
 	<ListGuesser {...props}>
-		<FieldGuesser source="id"/>
 		<ReferenceField
 			source="customer"
 			reference="customers"
-			filterToQuery={searchText => ({ name: searchText })}
 		>
 			<TextField source="name" />
 		</ReferenceField>

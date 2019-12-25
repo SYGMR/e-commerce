@@ -89,7 +89,6 @@ export const Create = props => (
 
 export const List = props => (
 	<ListGuesser {...props}>
-		<TextField source="id" />
 		<FieldGuesser source="username" />
 		<FieldGuesser source="email" />
 		<FieldGuesser source="roles" />

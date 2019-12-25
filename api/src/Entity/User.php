@@ -5,16 +5,26 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+
 
 /**
- * @ApiResource
+ * @ApiResource(
+ *     attributes={"security"="is_granted('ROLE_USER')"},
+ *     collectionOperations={
+ *         "get"={"security"="is_granted('ROLE_ADMIN')"},
+ *         "post"={"security"="is_granted('ROLE_ADMIN')"}
+ *     },
+ *     itemOperations={
+ *         "get",
+ *         "put"={"security"="is_granted('ROLE_ADMIN') or object == user"},
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface
 {
 	/**
-	 * @ApiProperty(identifier=true)
 	 * @ORM\Id()
 	 * @ORM\GeneratedValue()
 	 * @ORM\Column(type="integer")
@@ -44,18 +54,21 @@ class User implements UserInterface
 
 	/**
 	 * @ORM\OneToOne(targetEntity="App\Entity\Customer", inversedBy="user", cascade={"persist", "remove"})
+	 * @ApiSubresource
 	 */
-	private $customer;
+	public $customer;
 
 	/**
 	 * @ORM\OneToOne(targetEntity="App\Entity\Merchant", inversedBy="user", cascade={"persist", "remove"})
+	 * @ApiSubresource
 	 */
-	private $merchant;
+	public $merchant;
 
 	/**
 	 * @ORM\OneToOne(targetEntity="App\Entity\Seller", inversedBy="user", cascade={"persist", "remove"})
+	 * @ApiSubresource
 	 */
-	private $seller;
+	public $seller;
 
 
 	public function getId(): ?int
