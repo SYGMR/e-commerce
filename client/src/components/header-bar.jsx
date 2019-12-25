@@ -16,6 +16,8 @@ export class HeaderBar extends React.Component {
 			<div className="header-bar">
 				<h1>Univershop</h1>
 				<ul>
+					<li><Link to="/">Home</Link></li>
+					<li><Link to="/products">Products</Link></li>
 				{this.props.currentUser === null ?
 					<>
 						<li><Link to="/register">Register</Link></li>
@@ -23,7 +25,7 @@ export class HeaderBar extends React.Component {
 					</>
 				: [
 					this.props.currentUser.roles.includes("ROLE_ADMIN") && (
-						<li><Link to="/admin">Admin</Link></li>
+						<li><a href="/admin" target="_blank">Admin</a></li>
 					),
 					<li><button onClick={() => this.logOut()}>Log out</button></li>
 				 ]
