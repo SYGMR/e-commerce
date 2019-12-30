@@ -10,10 +10,9 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ApiResource(
- *     attributes={"security"="is_granted('ROLE_USER')"},
  *     collectionOperations={
  *         "get"={"security"="is_granted('ROLE_ADMIN')"},
- *         "post"={"security"="is_granted('ROLE_ADMIN')"}
+ *         "post"
  *     },
  *     itemOperations={
  *         "get",

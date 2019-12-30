@@ -13,7 +13,7 @@ export class RegistrationForm extends React.Component {
         const user = {username, email, password };
         return this.props
             .dispatch(registerUser(user))
-            .then(() => this.props.dispatch(login(username, password)));
+            .then(() => this.props.dispatch(login(email, password)));
     }
 
     render() {
@@ -30,7 +30,7 @@ export class RegistrationForm extends React.Component {
                     name="username"
                     validate={[required, nonEmpty, isTrimmed]}
                 />
-                <label htmlFor="email">email</label>
+                <label htmlFor="email">Email</label>
                 <Field
                     component={Input}
                     type="email"
