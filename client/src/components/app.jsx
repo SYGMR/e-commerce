@@ -8,7 +8,6 @@ import AdminPage from './admin-page';
 import DashboardPage from './dashboard-page';
 import RegistrationPage from './registration-page';
 import LoginPage from './login-page';
-import ProductsPage from './products-page';
 import {refreshAuthToken} from '../actions/auth';
 
 export class App extends React.Component {
@@ -51,7 +50,6 @@ export class App extends React.Component {
 									<Route exact path="/" component={LandingPage} />
 									<Route exact path="/register" component={RegistrationPage} />
 									<Route exact path="/login" component={LoginPage} />
-									<Route exact path="/products" component={ProductsPage} />
 									<Route exact path="/dashboard" component={DashboardPage} />
 									<Route><div>404 Not found</div></Route>
 								</Switch>

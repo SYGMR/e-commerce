@@ -17,7 +17,6 @@ export class HeaderBar extends React.Component {
 				<h1>Univershop</h1>
 				<ul>
 					<li><Link to="/">Home</Link></li>
-					<li><Link to="/products">Products</Link></li>
 				{this.props.currentUser === null ?
 					<>
 						<li><Link to="/register">Register</Link></li>
