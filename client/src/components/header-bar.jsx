@@ -27,7 +27,7 @@ export class HeaderBar extends React.Component {
 						<li><a href="/admin" target="_blank">Admin</a></li>
 					),
 					<>
-					<li><a href="/dashboard">Dashboard</a></li>
+					<li><Link to="/dashboard">Dashboard</Link></li>
 					<li><button onClick={() => this.logOut()}>Log out</button></li>
 					</>
 				 ]
