@@ -25,7 +25,7 @@ export class App extends React.Component {
 				this.stopPeriodicRefresh();
 		}
 
-		startPeriodicRefresh() {
+		startPeriodicRefresh() { // FIXME React admin might need some glue to work with this
 				this.refreshInterval = setInterval(
 						() => this.props.dispatch(refreshAuthToken()),
 						60 * 60 * 1000 // One hour
