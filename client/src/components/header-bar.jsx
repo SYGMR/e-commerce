@@ -17,6 +17,7 @@ export class HeaderBar extends React.Component {
 				<h1>Univershop</h1>
 				<ul>
 					<li><Link to="/">Home</Link></li>
+					<li><Link to="/cart">Panier</Link></li>
 				{this.props.currentUser === null ?
 					<>
 						<li><Link to="/register">Register</Link></li>
@@ -27,8 +28,8 @@ export class HeaderBar extends React.Component {
 						<li><a href="/admin" target="_blank">Admin</a></li>
 					),
 					<>
-					<li><Link to="/dashboard">Dashboard</Link></li>
-					<li><button onClick={() => this.logOut()}>Log out</button></li>
+						<li><Link to="/dashboard">Dashboard</Link></li>
+						<li><button onClick={() => this.logOut()}>Log out</button></li>
 					</>
 				 ]
 				}
