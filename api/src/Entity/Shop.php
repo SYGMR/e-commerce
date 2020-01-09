@@ -10,7 +10,6 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ApiResource(
- *     attributes={"security"="is_granted('ROLE_USER')"},
  *     collectionOperations={
  *         "get",
  *         "post"={"security"="is_granted('ROLE_ADMIN')"}
@@ -51,7 +50,7 @@ class Shop
 	private $merchant;
 
 	/**
-	 * @ORM\ManyToMany(targetEntity="App\Entity\ShopItem", mappedBy="shop")
+	 * @ORM\OneToMany(targetEntity="App\Entity\ShopItem", mappedBy="shop")
 	 * @ApiSubresource
 	 */
 	private $items;

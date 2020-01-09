@@ -5,8 +5,6 @@ import { Carousel } from 'react-responsive-carousel';
 import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { connect } from 'react-redux';
 
-
-
 export default class CartItem extends React.Component {
     render() {
         return (
