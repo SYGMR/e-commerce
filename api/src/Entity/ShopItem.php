@@ -18,6 +18,7 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  *     itemOperations={
  *         "get",
  *         "put"={"security"="is_granted('ROLE_ADMIN') or object.shop == user.merchant.shop"},
+ * 		   "delete"={"security"="is_granted('ROLE_ADMIN') or object.shop == user.merchant.shop"}
  *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ShopItemRepository")
@@ -50,7 +51,6 @@ class ShopItem
 
 	public function __construct()
 	{
-		$this->shop = new ArrayCollection();
 	}
 
 	public function getId(): ?int
@@ -71,28 +71,16 @@ class ShopItem
 	}
 
 	/**
-	 * @return Collection|Shop[]
+	 * @return Shop
 	 */
-	public function getShop(): Collection
+	public function getShop(): Shop
 	{
 		return $this->shop;
 	}
 
-	public function addShop(Shop $shop): self
+	public function setShop(Shop $shop): self
 	{
-		if (!$this->shop->contains($shop)) {
-			$this->shop[] = $shop;
-		}
-
-		return $this;
-	}
-
-	public function removeShop(Shop $shop): self
-	{
-		if ($this->shop->contains($shop)) {
-			$this->shop->removeElement($shop);
-		}
-
+		$this->shop = $shop;
 		return $this;
 	}
 
