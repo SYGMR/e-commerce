@@ -21,6 +21,8 @@ export class HeaderBar extends React.Component {
 					<>
 						<li><Link to="/register">Register</Link></li>
 						<li><Link to="/login">Login</Link></li>
+						<li><Link to="/categories">Categories Galactiques</Link></li>
+
 					</>
 				: [
 					this.props.currentUser.roles.includes("ROLE_ADMIN") && (
