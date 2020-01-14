@@ -29,10 +29,12 @@ export class HeaderBar extends React.Component {
 				: [
 					this.props.currentUser.roles.includes("ROLE_ADMIN") && (
 						<li><a href="/admin" target="_blank">Admin</a></li>
+
 					),
 					<>
-					<li><Link to="/dashboard">Dashboard</Link></li>
-					<li><button onClick={() => this.logOut()}>Log out</button></li>
+						<li><Link to="/dashboard">Dashboard</Link></li>
+						<li><Link to="/cart">Panier</Link></li>
+						<li><button onClick={() => this.logOut()}>Log out</button></li>
 					</>
 				 ]
 				}

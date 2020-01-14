@@ -52,64 +52,42 @@ class ShopItem
 	 * @ORM\Column(type="integer")
 	 */
 	private $quantity;
-
+	
 	public function __construct()
 	{
-		$this->shop = new ArrayCollection();
 	}
-
 	public function getId(): ?int
 	{
 		return $this->id;
 	}
-
 	public function getProduct(): ?Product
 	{
 		return $this->product;
 	}
-
 	public function setProduct(?Product $product): self
 	{
 		$this->product = $product;
-
 		return $this;
 	}
-
 	/**
-	 * @return Collection|Shop[]
+	 * @return Shop
 	 */
-	public function getShop(): Collection
+	public function getShop(): Shop
 	{
 		return $this->shop;
 	}
-
-	public function addShop(Shop $shop): self
+	public function setShop(Shop $shop): self
 	{
-		if (!$this->shop->contains($shop)) {
-			$this->shop[] = $shop;
-		}
-
+		$this->shop = $shop;
 		return $this;
 	}
-
-	public function removeShop(Shop $shop): self
-	{
-		if ($this->shop->contains($shop)) {
-			$this->shop->removeElement($shop);
-		}
-
-		return $this;
-	}
-
 	public function getQuantity(): ?int
 	{
 		return $this->quantity;
 	}
-
 	public function setQuantity(int $quantity): self
 	{
 		$this->quantity = $quantity;
-
 		return $this;
 	}
 }
