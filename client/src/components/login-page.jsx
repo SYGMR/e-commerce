@@ -10,7 +10,6 @@ export function LoginPage(props) {
 		}
 		return (
 				<div className="home">
-						<h2>Login for Univershop</h2>
 						<LoginForm />
 				</div>
 		);

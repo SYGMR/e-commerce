@@ -9,6 +9,7 @@ import DashboardPage from './dashboard-page';
 import RegistrationPage from './registration-page';
 import LoginPage from './login-page';
 import {refreshAuthToken} from '../actions/auth';
+import CartPage from './cart-page';
 
 export class App extends React.Component {
 		componentDidUpdate(prevProps) {
@@ -51,6 +52,7 @@ export class App extends React.Component {
 									<Route exact path="/register" component={RegistrationPage} />
 									<Route exact path="/login" component={LoginPage} />
 									<Route exact path="/dashboard" component={DashboardPage} />
+									<Route exact path="/cart" component={CartPage} />
 									<Route><div>404 Not found</div></Route>
 								</Switch>
 							</React.Fragment>
