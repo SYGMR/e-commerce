@@ -19,6 +19,11 @@ export class HeaderBar extends React.Component {
 				<li><Link to="/cart"><img src="/SVG/basket.svg" className="icon" alt="#" /></Link></li>
 				{this.props.currentUser === null ?
 					<>
+
+						<li><Link to="/register">Register</Link></li>
+						<li><Link to="/login">Login</Link></li>
+						<li><Link to="/categories">Categories Galactiques</Link></li>
+
 						<li><Link to="/login"><img src="/SVG/user.svg" className="icon" alt="#" /></Link></li>
 					</>
 				: [

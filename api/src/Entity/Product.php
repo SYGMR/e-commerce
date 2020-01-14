@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
@@ -21,6 +22,7 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  *         "put"={"security"="is_granted('ROLE_ADMIN')"},
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"id"})
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product
@@ -29,22 +31,26 @@ class Product
 	 * @ORM\Id()
 	 * @ORM\GeneratedValue()
 	 * @ORM\Column(type="integer")
+	 * @Groups({"shop_item"})
 	 */
 	private $id;
 
 	/**
 	 * @ApiFilter(SearchFilter::class, strategy="ipartial")
 	 * @ORM\Column(type="string", length=255)
+	 * @Groups({"shop_item"})
 	 */
 	private $name;
 
 	/**
 	 * @ORM\Column(type="string", length=255)
+	 * @Groups({"shop_item"})
 	 */
 	private $description;
 
 	/**
 	 * @ORM\Column(type="decimal")
+	 * @Groups({"shop_item"})
 	 */
 	private $price;
 
@@ -62,6 +68,7 @@ class Product
 
 		/**
 		 * @ORM\OneToMany(targetEntity="App\Entity\CartItem", mappedBy="product", orphanRemoval=true)
+	 	 * @Groups({"shop_item"})
 		 */
 		private $cartItems;
 
