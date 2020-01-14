@@ -1,5 +1,193 @@
-body {
+*{
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  box-sizing: border-box;
+  font-family: 'Alata', sans-serif;
+}
+
+a{
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+/*************************************/
+/***********    HEADER    ************/
+/*************************************/
+
+#logo {
+  font-weight: normal;
+  font-family: 'Monoton', cursive;
+  color:#84BC9C;
+}
+
+.header-bar {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+  background-color: #0A2E36;
+  margin-bottom: 50px;
+}
+
+.header-bar ul{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 75px;
+    justify-content: space-around;
+}
+
+.header-bar img.icon:hover {
+  transform: scale(1.1);
+  transition-duration: 0.5s;
+  fill: #e1b382;
+}
+
+.header-bar img.icon{
+  transition-duration: 0.5s;
+}
+
+/*************************************/
+/***********     FORM     ************/
+/*************************************/
+
+.login-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 30vw;
+  margin: auto;
+  background: rgba(119, 119, 119, 0.8);
+  padding: 35px;
+  box-sizing: content-box;
+  border-radius: 65px 25px;
+}
+
+.login-form h2 {
+  margin-bottom: 40px;
+}
+
+.form-error {
+  position: absolute;
+  right: 20px;
+  top: 55%;
+  transform: translateY(-50%);
+  color: #fa7575;
+}
+.form-input {
+  width: inherit;
+  position: relative;
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.login-form input {
+  width: inherit;
+  border: none;
+  padding: 0px 15px;
+  font-size: 1rem;
+  border-radius: 50px;
+  height: inherit;
+}
+
+.login-form button {
+  width: 100px;
+  padding: 5px;
+  border-radius: 50px;
+  border: none;
+}
+
+.login-form .form-bottom{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/*************************************/
+/***********   PANIER     ************/
+/*************************************/
+
+.cart h2{
+  text-align: center;
+  padding: 30px 0;
+  color: #84BC9C;
+  border-bottom: 1px solid #eee;
+  letter-spacing: 3px;
+}
+.cart > div {
+  display: flex;
+  justify-content: space-around;
+  
+}
+
+.Cart-Left, .Cart-Right{
+  background: #f7f7f7;
+  border: 3px solid #eee;
+  border-radius: 10px;
+}
+.Cart-Left{
+  width: 68%;
+}
+.Cart-Right{
+  width: 28%;
+  padding: 0 30px;
+}
+.Cart-Right h3{
+  width: 80%;
+  margin: 20px auto;
+}
+
+.Product{
+  display: flex;
+  padding: 10px;
+  position: relative;
+}
+.Product:hover{
+  background-color: #eee;
+}
+
+.cart .Content {
+  margin-left: 10px;
+}
+
+.cart .Product > img{
+  position: absolute;
+  right: 0;
+  top:0;
+  padding: 10px;
+}
+
+.payment{
+  width: 80%;
+  height: 40px;
+  display: block;
+  margin: auto;
+  border-radius: 5px;
+  border: none;
+  background-color: #84BC9C;
+  transition-duration: 0.3s;
+}
+
+.payment:hover {
+  box-shadow: 0px 0px 5px black;
+  transition-duration: 0.3s;
+}
+
+#credit-cards {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.credit-card{
+  width: 10px;
 }

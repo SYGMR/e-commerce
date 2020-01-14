@@ -66,11 +66,11 @@ class Product
 	 */
 	private $images = [];
 
-	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\CartItem", mappedBy="product", orphanRemoval=true)
-	 * @Groups({"shop_item"})
-	 */
-	private $cartItems;
+		/**
+		 * @ORM\OneToMany(targetEntity="App\Entity\CartItem", mappedBy="product", orphanRemoval=true)
+	 	 * @Groups({"shop_item"})
+		 */
+		private $cartItems;
 
 	public function __construct()
 	{

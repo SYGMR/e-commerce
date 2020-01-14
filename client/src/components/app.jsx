@@ -15,7 +15,6 @@ import ShopPage from './shop-page';
 import ProductPage from './products-page';
 import DetailsProduct from './productdetail-page';
 
-
 export class App extends React.Component {
 		componentDidUpdate(prevProps) {
 				if (!prevProps.loggedIn && this.props.loggedIn) {

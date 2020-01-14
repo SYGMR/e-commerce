@@ -14,14 +14,17 @@ export class HeaderBar extends React.Component {
 		// Only render the log out button if we are logged in
 		return (
 			<div className="header-bar">
-				<h1>Univershop</h1>
+				<Link to="/"><h1 id="logo">UNIVERSHOP</h1></Link>
 				<ul>
-					<li><Link to="/">Home</Link></li>
-					<li><Link to="/categories">categories</Link></li>
+				<li><Link to="/cart"><img src="/SVG/basket.svg" className="icon" alt="#" /></Link></li>
 				{this.props.currentUser === null ?
 					<>
+
 						<li><Link to="/register">Register</Link></li>
 						<li><Link to="/login">Login</Link></li>
+						<li><Link to="/categories">Categories Galactiques</Link></li>
+
+						<li><Link to="/login"><img src="/SVG/user.svg" className="icon" alt="#" /></Link></li>
 					</>
 				: [
 					this.props.currentUser.roles.includes("ROLE_ADMIN") && (

@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
 export default class DetailsProduct extends React.Component {
 
@@ -29,12 +28,10 @@ export default class DetailsProduct extends React.Component {
             <h4>{product.description}</h4>
             <h4>{product.price}</h4>
             <h4>{product.images}</h4>
-            <button>Add</button>
             </div>
         ))
         return <>
-            <h2>Products</h2>
-            {Products}
+        {Products}
         </>
         ;
     }
