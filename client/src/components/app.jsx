@@ -59,7 +59,7 @@ export class App extends React.Component {
 									<Route exact path="/dashboard" component={DashboardPage} />
 									<Route exact path="/categories" component={CategoriesPage} />
 									<Route exact path="/category/:id" component={ShopPage} />
-									<Route exact path="/category/:cat_id/shop/:shop_id" component={ProductPage} />
+									<Route exact path="/shop/:shop_id" component={ProductPage} />
 									<Route exact path="/product/:product_id" component={DetailsProduct} />
 									<Route exact path="/cart" component={CartPage} />
 									<Route><div>404 Not found</div></Route>

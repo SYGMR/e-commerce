@@ -19,6 +19,11 @@ export default class ProductPage extends React.Component {
                 shopItems: res["hydra:member"]
              })
         })
+        
+    }
+
+    chemin() {
+
     }
 
     addToCart(id){
@@ -45,11 +50,12 @@ export default class ProductPage extends React.Component {
         const shop_items = this.state.shopItems.map(shopItem => (
             
             <div key={shopItem.product.id}>
-            <h2><Link to={`/product/${shopItem.product.id}`}>{shopItem.product.name}</Link></h2>
-            <h4>{shopItem.product.description}</h4>
-            <h3>{shopItem.product.price}</h3>
-            <button onClick={this.addToCart.bind(this, shopItem.product.id)}>Add to Cart</button>
+                <h2><Link to={`/product/${shopItem.product.id}`}>{shopItem.product.name}</Link></h2>
+                <h4>{shopItem.product.description}</h4>
+                <h3>{shopItem.product.price}</h3>
+                <button onClick={this.addToCart.bind(this, shopItem.product.id)}>Add to Cart</button>
             </div>
+            
         ))
         return (
             <>

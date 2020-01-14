@@ -9,36 +9,36 @@ export default class Cart extends React.Component {
         super(props)
         this.state = {
             items: [
-                // {
-                //     id: 1,
-                //     cart: null,
-                //     product: {
-                //         category: null,
-                //         name: "Rustic Silk Wallet",
-                //         description: "Ex repellendus sint eos vel.Perspiciatis dignissi...",
-                //         price: 1306,
-                //         image: [
-                //             '/img/imgProduct01.png',
-                //             '/img/imgProduct02.png',
-                //             '/img/imgProduct03.png',
-                //         ]
-                //     },
-                // },
-                // {
-                //     id: 2,
-                //     cart: null,
-                //     product: {
-                //         category: null,
-                //         name: "Fantastic Linen Knife",
-                //         description: "Expedita voluptas recusandae ut. Culpa non ratione...",
-                //         price: 6554,
-                //         image: [
-                //             '/img/imgProduct01.png',
-                //             '/img/imgProduct02.png',
-                //             '/img/imgProduct03.png',
-                //         ]
-                //     },
-                // }
+                {
+                    id: 1,
+                    cart: null,
+                    product: {
+                        category: null,
+                        name: "Rustic Silk Wallet",
+                        description: "Ex repellendus sint eos vel.Perspiciatis dignissi...",
+                        price: 1306,
+                        image: [
+                            '/img/imgProduct01.png',
+                            '/img/imgProduct02.png',
+                            '/img/imgProduct03.png',
+                        ]
+                    },
+                },
+                {
+                    id: 2,
+                    cart: null,
+                    product: {
+                        category: null,
+                        name: "Fantastic Linen Knife",
+                        description: "Expedita voluptas recusandae ut. Culpa non ratione...",
+                        price: 6554,
+                        image: [
+                            '/img/imgProduct01.png',
+                            '/img/imgProduct02.png',
+                            '/img/imgProduct03.png',
+                        ]
+                    },
+                }
             ]
 
         }

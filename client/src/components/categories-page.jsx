@@ -6,7 +6,7 @@ export default class CategoriesPages extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            categories: []
+            categories: [],
         }
     }
 
