@@ -8,7 +8,6 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ApiResource(
- *     attributes={"security"="is_granted('ROLE_USER')"},
  *     collectionOperations={
  *         "get",
  *         "post"={"security"="is_granted('ROLE_ADMIN')"}
