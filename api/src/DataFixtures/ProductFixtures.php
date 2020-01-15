@@ -14,8 +14,12 @@ class ProductFixtures extends BaseFixture
 						$category->setName($this->faker->productName)
 							->setDescription($this->faker->text)
 							->setPrice($this->faker->numberBetween(1, 9000))
-							->setCategory($this->getRandomReference(Category::class));
-							/*->setImages([])*/
+							->setCategory($this->getRandomReference(Category::class))
+							->setImages([
+								'/img/imgProduct01.png',
+								'/img/imgProduct02.png',
+								'/img/imgProduct03.png',
+								]);
 				});
 
 				$manager->flush();

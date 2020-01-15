@@ -5,6 +5,60 @@
   font-family: 'Alata', sans-serif;
 }
 
+
+/*************************************/
+/***********    GALAXY   ************/
+/*************************************/
+
+.blur
+{
+  position: fixed;
+  display: 'block';
+  opacity:0;
+  background-color: black;
+  width: 0px;
+  height: 0px;
+  transition: opacity 0.7s linear;
+
+}
+
+.tooltip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  min-width: 100px;
+  text-align: center;
+  padding: 5px 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: none;
+  opacity: 0;
+  color: white;
+  transition: opacity 0.25s linear;
+}
+
+.description
+{
+  font-size:1em;
+  z-index: 9999;
+  position: fixed;
+  left: 0;
+  top: 300px;
+  width: 300px;
+  left: 100px;
+  text-align: center;
+  padding: 5px 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: none;
+  opacity: 0;
+  color: white;
+  transition: opacity 0.7s linear;
+}
+
+
+.description a{
+  color: white;
+}
+
 a{
   text-decoration: none;
 }
@@ -191,3 +245,4 @@ li {
 .credit-card{
   width: 10px;
 }
+

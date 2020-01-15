@@ -63,7 +63,8 @@ export default class Cart extends React.Component {
                 </div>
             );
         }
-        return (
+        if (this.state.items && this.state.items.length > 0) {
+             return (
             <div>
                 <div className="Cart-Left">
                     <h2>MON PANIER</h2>
@@ -89,5 +90,13 @@ export default class Cart extends React.Component {
                 </div>
             </div>
         );
+        } else {
+            return (
+                 <div className="cart-error" aria-live="polite">
+                    <h6>Panier Vide !!!</h6>
+                </div>
+            )
+           
+        }
     }
 }
