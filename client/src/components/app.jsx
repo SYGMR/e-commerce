@@ -10,6 +10,7 @@ import RegistrationPage from './registration-page';
 import LoginPage from './login-page';
 import {refreshAuthToken} from '../actions/auth';
 
+
 export class App extends React.Component {
 		componentDidUpdate(prevProps) {
 				if (!prevProps.loggedIn && this.props.loggedIn) {
