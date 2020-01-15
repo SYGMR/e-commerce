@@ -3,12 +3,17 @@ import {connect} from 'react-redux';
 import {Route, withRouter, Switch} from 'react-router-dom';
 
 import HeaderBar from './header-bar';
+import CartPage from './cart-page';
 import LandingPage from './landing-page';
 import AdminPage from './admin-page';
 import DashboardPage from './dashboard-page';
 import RegistrationPage from './registration-page';
 import LoginPage from './login-page';
 import {refreshAuthToken} from '../actions/auth';
+import CategoriesPage from './categories-page';
+import ShopPage from './shop-page';
+import ProductPage from './products-page';
+import DetailsProduct from './productdetail-page';
 
 
 export class App extends React.Component {
@@ -48,10 +53,15 @@ export class App extends React.Component {
 							<React.Fragment>
 								<HeaderBar />
 								<Switch>
-									<Route exact path="/" component={LandingPage} />
+								<Route exact path="/" component={LandingPage} />
 									<Route exact path="/register" component={RegistrationPage} />
 									<Route exact path="/login" component={LoginPage} />
 									<Route exact path="/dashboard" component={DashboardPage} />
+									<Route exact path="/categories" component={CategoriesPage} />
+									<Route exact path="/category/:id" component={ShopPage} />
+									<Route exact path="/shop/:shop_id" component={ProductPage} />
+									<Route exact path="/product/:product_id" component={DetailsProduct} />
+									<Route exact path="/cart" component={CartPage} />
 									<Route><div>404 Not found</div></Route>
 								</Switch>
 							</React.Fragment>
