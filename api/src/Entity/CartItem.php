@@ -32,11 +32,11 @@ class CartItem
 	private $quantity;
 
 	/**
-	* @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="cartItems")
+	* @ORM\ManyToOne(targetEntity="App\Entity\ShopItem", inversedBy="cartItems")
 	* @ORM\JoinColumn(nullable=false)
 	* @ApiSubresource
 	*/
-	private $product;
+	private $shopItem;
 
 	public function getId(): ?int
 	{
@@ -67,14 +67,14 @@ class CartItem
 		return $this;
 	}
 
-	public function getProduct(): ?Product
+	public function getShopItem(): ?ShopItem
 	{
-		return $this->product;
+		return $this->shopItem;
 	}
 
-	public function setProduct(?Product $product): self
+	public function setShopItem(?ShopItem $shopItem): self
 	{
-		$this->product = $product;
+		$this->shopItem = $shopItem;
 
 		return $this;
 	}
