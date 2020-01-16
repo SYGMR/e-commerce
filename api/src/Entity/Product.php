@@ -12,6 +12,7 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  * @ApiResource(
  *     collectionOperations={
  *         "get",
@@ -23,7 +24,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     }
  * )
  * @ApiFilter(SearchFilter::class, properties={"id"})
- * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product
 {
@@ -68,7 +68,7 @@ class Product
 
 		/**
 		 * @ORM\OneToMany(targetEntity="App\Entity\CartItem", mappedBy="product", orphanRemoval=true)
-	 	 * @Groups({"shop_item"})
+		 * @Groups({"shop_item"})
 		 */
 		private $cartItems;
 

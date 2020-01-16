@@ -13,8 +13,7 @@ class ShopItemFixtures extends BaseFixture
 		{
 				$this->createMany(ShopItem::class, 500, function(ShopItem $shopItem, $count) {
 							$shopItem->setProduct($this->getRandomReference(Product::class))
-							->setShop($this->getRandomReference(Shop::class))
-							->setQuantity($this->faker->numberBetween(1, 3));
+							->setShop($this->getRandomReference(Shop::class));
 				});
 
 				$manager->flush();

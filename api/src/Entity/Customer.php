@@ -9,6 +9,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
+ * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
  * @ApiResource(
  *     collectionOperations={
  *         "get",
@@ -19,7 +20,6 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  *         "put"={"security"="is_granted('ROLE_ADMIN') or object.user == user"},
  *     }
  * )
- * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
  */
 class Customer
 {

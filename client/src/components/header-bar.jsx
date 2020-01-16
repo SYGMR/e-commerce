@@ -16,13 +16,8 @@ export class HeaderBar extends React.Component {
 			<div className="header-bar">
 				<Link to="/"><h1 id="logo">UNIVERSHOP</h1></Link>
 				<ul>
-				<li><Link to="/cart"><img src="/SVG/basket.svg" className="icon" alt="#" /></Link></li>
 				{this.props.currentUser === null ?
 					<>
-
-						<li><Link to="/register">Register</Link></li>
-						<li><Link to="/login">Login</Link></li>
-						<li><Link to="/categories">Categories Galactiques</Link></li>
 
 						<li><Link to="/login"><img src="/SVG/user.svg" className="icon" alt="#" /></Link></li>
 					</>
@@ -33,7 +28,6 @@ export class HeaderBar extends React.Component {
 					),
 					<>
 						<li><Link to="/dashboard">Dashboard</Link></li>
-						<li><Link to="/cart">Panier</Link></li>
 						<li><button onClick={() => this.logOut()}>Log out</button></li>
 					</>
 				 ]

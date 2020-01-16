@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  * @ApiResource(
  *     collectionOperations={
  *         "get",
@@ -19,7 +20,6 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  *         "put"={"security"="is_granted('ROLE_ADMIN')"},
  *     }
  * )
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
 class Category
 {

@@ -9,6 +9,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
+ * @ORM\Entity(repositoryClass="App\Repository\ShopRepository")
  * @ApiResource(
  *     collectionOperations={
  *         "get",
@@ -20,110 +21,108 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     }
  * )
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "category": "exact"})
- * @ORM\Entity(repositoryClass="App\Repository\ShopRepository")
  */
 class Shop
 
 {
 	
 	/**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="shops")
-     * @ORM\JoinColumn(nullable=false)
-     * @ApiSubresource
-     */
+	 * @ORM\Id()
+	 * @ORM\GeneratedValue()
+	 * @ORM\Column(type="integer")
+	 */
+	private $id;    
 
+	/**
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="shops")
+	 * @ORM\JoinColumn(nullable=false)
+	 * @ApiSubresource
+	 */
 	private $category;    
 	
 	/**
-     * @ORM\Column(type="string", length=255)
-     */
+	 * @ORM\Column(type="string", length=255)
+	 */
 	private $name;    
 	
 	/**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Merchant", inversedBy="shop")
-     * @ORM\JoinColumn(nullable=false)
-     * @ApiSubresource
-     */
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Merchant", inversedBy="shop")
+	 * @ORM\JoinColumn(nullable=false)
+	 * @ApiSubresource
+	 */
 	private $merchant;    
 	
 	/**
-     * @ORM\OneToMany(targetEntity="App\Entity\ShopItem", mappedBy="shop")
-     * @ApiSubresource
-     */
-	
-	 private $items;    
+	 * @ORM\OneToMany(targetEntity="App\Entity\ShopItem", mappedBy="shop")
+	 * @ApiSubresource
+	 */
+	private $items;    
 	 
-	 public function __construct()
-    {
-        $this->items = new ArrayCollection();
+	public function __construct()
+	{
+			$this->items = new ArrayCollection();
 	}    
 	
 	public function getId(): ?int
-    {
-        return $this->id;
+	{
+			return $this->id;
 	}    
 	
 	public function getCategory(): ?Category
-    {
-        return $this->category;
+	{
+			return $this->category;
 	}    
 	
 	public function setCategory(?Category $category): self
-    {
-		$this->category = $category;        
-		return $this;
+	{
+			$this->category = $category;        
+			return $this;
 	}    
-	
+
 	public function getName(): ?string
-    {
-        return $this->name;
+	{
+			return $this->name;
 	}    
-	
+
 	public function setName(string $name): self
-    {
+	{
 		$this->name = $name;        
 		return $this;
 	}    
 	
 	public function getMerchant(): ?Merchant
-    {
-        return $this->merchant;
+	{
+			return $this->merchant;
 	}    
 	
 	public function setMerchant(?Merchant $merchant): self
-    {
-		$this->merchant = $merchant;        
-		return $this;
+	{
+			$this->merchant = $merchant;        
+			return $this;
 	}    
 	
 	/**
-     * @return Collection|ShopItem[]
-     */
-
-    public function getItems(): Collection
-    {
-        return $this->items;
+	 * @return Collection|ShopItem[]
+	 */
+	public function getItems(): Collection
+	{
+			return $this->items;
 	}    
 	
 	public function addItem(ShopItem $item): self
-    {
-        if (!$this->items->contains($item)) {
-            $this->items[] = $item;
-            $item->addShop($this);
-        }        return $this;
+	{
+			if (!$this->items->contains($item)) {
+					$this->items[] = $item;
+					$item->addShop($this);
+			}        return $this;
 	}    
 	
 	public function removeItem(ShopItem $item): self
-    {
-        if ($this->items->contains($item)) {
-            $this->items->removeElement($item);
-            $item->removeShop($this);
-		}        
-		return $this;
-    }
+	{
+			if ($this->items->contains($item)) {
+					$this->items->removeElement($item);
+					$item->removeShop($this);
+			}        
+			return $this;
+	}
 }

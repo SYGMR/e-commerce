@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\CartItemRepository")
+ * @ApiResource
  */
 class CartItem
 {
@@ -25,11 +25,6 @@ class CartItem
 	 * @ApiSubresource
 	 */
 	private $cart;
-
-	/**
-	 * @ORM\Column(type="integer")
-	 */
-	private $quantity;
 
 	/**
 	* @ORM\ManyToOne(targetEntity="App\Entity\ShopItem", inversedBy="cartItems")
@@ -51,18 +46,6 @@ class CartItem
 	public function setCart(?Cart $cart): self
 	{
 		$this->cart = $cart;
-
-		return $this;
-	}
-
-	public function getQuantity(): ?int
-	{
-		return $this->quantity;
-	}
-
-	public function setQuantity(int $quantity): self
-	{
-		$this->quantity = $quantity;
 
 		return $this;
 	}

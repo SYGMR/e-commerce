@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource
  * @ORM\Entity(repositoryClass="App\Repository\CartRepository")
+ * @ApiResource
  */
 class Cart
 {
@@ -31,11 +31,11 @@ class Cart
 	 * @ApiSubresource
 	 * @ORM\OneToMany(targetEntity="App\Entity\CartItem", mappedBy="cart", orphanRemoval=true)
 	 */
-	private $cartItems;
+	private $items;
 
 	public function __construct()
 	{
-		$this->cartItems = new ArrayCollection();
+		$this->items = new ArrayCollection();
 	}
 
 	public function getId(): ?int
@@ -58,28 +58,28 @@ class Cart
 	/**
 	 * @return Collection|CartItem[]
 	 */
-	public function getCartItems(): Collection
+	public function getItems(): Collection
 	{
-		return $this->cartItems;
+		return $this->items;
 	}
 
-	public function addCartItem(CartItem $cartItem): self
+	public function addItem(CartItem $item): self
 	{
-		if (!$this->cartItems->contains($cartItem)) {
-			$this->cartItems[] = $cartItem;
-			$cartItem->setCart($this);
+		if (!$this->items->contains($item)) {
+			$this->items[] = $item;
+			$item->setCart($this);
 		}
 
 		return $this;
 	}
 
-	public function removeCartItem(CartItem $cartItem): self
+	public function removeItem(CartItem $item): self
 	{
-		if ($this->cartItems->contains($cartItem)) {
-			$this->cartItems->removeElement($cartItem);
+		if ($this->items->contains($item)) {
+			$this->items->removeElement($item);
 			// set the owning side to null (unless already changed)
-			if ($cartItem->getCart() === $this) {
-				$cartItem->setCart(null);
+			if ($item->getCart() === $this) {
+				$item->setCart(null);
 			}
 		}
 

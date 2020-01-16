@@ -12,6 +12,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
+ * @ORM\Entity(repositoryClass="App\Repository\ShopItemRepository")
  * @ApiResource(
  *     collectionOperations={
  *         "get",
@@ -24,7 +25,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * 		normalizationContext={"groups"={"shop_item"}}
  * )
  * * @ApiFilter(SearchFilter::class, properties={"shop"})
- * @ORM\Entity(repositoryClass="App\Repository\ShopItemRepository")
  */
 class ShopItem
 {
@@ -47,28 +47,23 @@ class ShopItem
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Shop", inversedBy="items")
 	 */
 	private $shop;
-
-	/**
-	 * @ORM\Column(type="integer")
-	 */
-	private $quantity;
 	
-	public function __construct()
-	{
-	}
 	public function getId(): ?int
 	{
 		return $this->id;
 	}
+
 	public function getProduct(): ?Product
 	{
 		return $this->product;
 	}
+
 	public function setProduct(?Product $product): self
 	{
 		$this->product = $product;
 		return $this;
 	}
+
 	/**
 	 * @return Shop
 	 */
@@ -76,18 +71,11 @@ class ShopItem
 	{
 		return $this->shop;
 	}
+
 	public function setShop(Shop $shop): self
 	{
 		$this->shop = $shop;
 		return $this;
 	}
-	public function getQuantity(): ?int
-	{
-		return $this->quantity;
-	}
-	public function setQuantity(int $quantity): self
-	{
-		$this->quantity = $quantity;
-		return $this;
-	}
+
 }

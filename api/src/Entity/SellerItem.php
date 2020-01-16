@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
+ * @ORM\Entity(repositoryClass="App\Repository\SellerItemRepository")
  * @ApiResource(
  *     collectionOperations={
  *         "get",
@@ -17,7 +18,6 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  *         "put"={"security"="is_granted('ROLE_ADMIN') or object.seller == user.seller"},
  *     }
  * )
- * @ORM\Entity(repositoryClass="App\Repository\SellerItemRepository")
  */
 class SellerItem
 {
