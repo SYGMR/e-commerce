@@ -7,12 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiSubresource;
-use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ShopItemRepository")
  * @ApiResource(
  *     collectionOperations={
  *         "get",
@@ -22,9 +21,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *         "get",
  *         "put"={"security"="is_granted('ROLE_ADMIN') or object.shop == user.merchant.shop"},
  *     },
- * 		normalizationContext={"groups"={"shop_item"}}
+* 	   normalizationContext={"groups"={"shop_item"}}
  * )
- * * @ApiFilter(SearchFilter::class, properties={"shop"})
+ * @ApiFilter(SearchFilter::class, properties={"shop"})
+ * @ORM\Entity(repositoryClass="App\Repository\ShopItemRepository")
  */
 class ShopItem
 {
@@ -44,10 +44,11 @@ class ShopItem
 	private $product;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="App\Entity\Shop", inversedBy="items")
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Shop", inversedBy="shopItems")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $shop;
-	
+
 	public function getId(): ?int
 	{
 		return $this->id;
@@ -61,21 +62,19 @@ class ShopItem
 	public function setProduct(?Product $product): self
 	{
 		$this->product = $product;
+
 		return $this;
 	}
 
-	/**
-	 * @return Shop
-	 */
-	public function getShop(): Shop
+	public function getShop(): ?Shop
 	{
 		return $this->shop;
 	}
 
-	public function setShop(Shop $shop): self
+	public function setShop(?Shop $shop): self
 	{
 		$this->shop = $shop;
+
 		return $this;
 	}
-
 }

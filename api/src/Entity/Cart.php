@@ -7,10 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\HttpFoundation\Cookie;  
+
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CartRepository")
  * @ApiResource
+ * @ORM\Entity(repositoryClass="App\Repository\CartRepository")
+ * normalizationContext={"groups"={"cart"}})
  */
 class Cart
 {
@@ -22,67 +28,87 @@ class Cart
 	private $id;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="App\Entity\Customer", inversedBy="cart", cascade={"persist", "remove"})
+	 * @ORM\OneToOne(targetEntity="App\Entity\CartItem", inversedBy="cart", cascade={"persist", "remove"})
 	 * @ORM\JoinColumn(nullable=false)
 	 */
-	public $customer;
+	public $session;
+
 
 	/**
 	 * @ApiSubresource
 	 * @ORM\OneToMany(targetEntity="App\Entity\CartItem", mappedBy="cart", orphanRemoval=true)
+	 * @Groups({"cart"})
 	 */
-	private $items;
+	private $cartItems;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $session_time;
 
 	public function __construct()
-	{
-		$this->items = new ArrayCollection();
-	}
+         	{
+         		$this->cartItems = new ArrayCollection();
+         	}
 
 	public function getId(): ?int
-	{
-		return $this->id;
-	}
+         	{
+         		return $this->id;
+         	}
 
-	public function getCustomer(): ?Customer
-	{
-		return $this->customer;
-	}
+	public function getSession(): ?string
+         	{
+         		return $this->session;
+         	}
 
-	public function setCustomer(Customer $customer): self
-	{
-		$this->customer = $customer;
-
-		return $this;
-	}
+	public function setSession(string $session): self
+         	{
+				$this->$session = new Cookie('color', 'green', strtotime('tomorrow'), '/', 
+				'somedomain.com', true, true);
+         
+         		return $this;
+         	}
 
 	/**
 	 * @return Collection|CartItem[]
 	 */
-	public function getItems(): Collection
-	{
-		return $this->items;
-	}
+	public function getCartItems(): Collection
+         	{
+         		return $this->cartItems;
+         	}
 
-	public function addItem(CartItem $item): self
-	{
-		if (!$this->items->contains($item)) {
-			$this->items[] = $item;
-			$item->setCart($this);
-		}
+	public function addCartItem(CartItem $cartItem): self
+         	{
+         		if (!$this->cartItems->contains($cartItem)) {
+         			$this->cartItems[] = $cartItem;
+         			$cartItem->setCart($this);
+         		}
+         
+         		return $this;
+         	}
 
-		return $this;
-	}
+	public function removeCartItem(CartItem $cartItem): self
+         	{
+         		if ($this->cartItems->contains($cartItem)) {
+         			$this->cartItems->removeElement($cartItem);
+         			// set the owning side to null (unless already changed)
+         			if ($cartItem->getCart() === $this) {
+         				$cartItem->setCart(null);
+         			}
+         		}
+         
+         		return $this;
+         	}
 
-	public function removeItem(CartItem $item): self
-	{
-		if ($this->items->contains($item)) {
-			$this->items->removeElement($item);
-			// set the owning side to null (unless already changed)
-			if ($item->getCart() === $this) {
-				$item->setCart(null);
-			}
-		}
+    public function getSessionTime(): ?\DateTimeInterface
+    {
+        return $this->session_time;
+    }
 
-		return $this;
-	}
+    public function setSessionTime(\DateTimeInterface $session_time): self
+    {
+        $this->session_time = $session_time;
+
+        return $this;
+    }
 }

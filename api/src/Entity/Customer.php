@@ -9,8 +9,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
  * @ApiResource(
+ *     attributes={"security"="is_granted('ROLE_USER')"},
  *     collectionOperations={
  *         "get",
  *         "post"={"security"="is_granted('ROLE_ADMIN')"}
@@ -20,6 +20,7 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  *         "put"={"security"="is_granted('ROLE_ADMIN') or object.user == user"},
  *     }
  * )
+ * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
  */
 class Customer
 {
@@ -45,12 +46,6 @@ class Customer
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $address;
-
-	/**
-	 * @ORM\OneToOne(targetEntity="App\Entity\Cart", mappedBy="customer", cascade={"persist", "remove"})
-	 * @ApiSubresource
-	 */
-	private $cart;
 
 	/**
 	 * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
@@ -100,23 +95,6 @@ class Customer
 	public function setAddress(string $address): self
 	{
 		$this->address = $address;
- 
-		return $this;
-	}
-
-	public function getCart(): ?Cart
-	{
-		return $this->cart;
-	}
-
-	public function setCart(Cart $cart): self
-	{
-		$this->cart = $cart;
- 
-		// set the owning side of the relation if necessary
-		if ($cart->getCustomer() !== $this) {
-			$cart->setCustomer($this);
-		}
  
 		return $this;
 	}

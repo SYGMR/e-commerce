@@ -9,7 +9,6 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ApiResource(
  *     collectionOperations={
  *         "get"={"security"="is_granted('ROLE_ADMIN')"},
@@ -20,6 +19,7 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  *         "put"={"security"="is_granted('ROLE_ADMIN') or object == user"},
  *     }
  * )
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface
 {

@@ -4,6 +4,7 @@ import {clearAuth} from '../actions/auth';
 import {Link} from 'react-router-dom';
 
 export class HeaderBar extends React.Component {
+
 	logOut() {
 		this.props.dispatch(clearAuth());
 		localStorage.removeItem("token")
@@ -11,24 +12,26 @@ export class HeaderBar extends React.Component {
 	}
 
 	render() {
-		// Only render the log out button if we are logged in
-		return (
+		return	(
 			<div className="header-bar">
 				<Link to="/"><h1 id="logo">UNIVERSHOP</h1></Link>
 				<ul>
+				<li><Link to="/cart"><img src="/SVG/basket.svg" className="icon" alt="#" /></Link><span>Panier ({this.props.cart.filter((item, index, self) => {
+						let findIndex = self.findIndex(itemB => item.id === itemB.id)
+						return findIndex === index
+					}).length})</span></li>
 				{this.props.currentUser === null ?
 					<>
-
-						<li><Link to="/login"><img src="/SVG/user.svg" className="icon" alt="#" /></Link></li>
+						<li><Link to="/login"><img src="/SVG/user.svg" className="icon" alt="#" /></Link><span>Login</span></li>
 					</>
 				: [
 					this.props.currentUser.roles.includes("ROLE_ADMIN") && (
-						<li><a href="/admin" target="_blank">Admin</a></li>
+						<li><a href="/admin" target="_blank"><img src="/SVG/settings.svg" className="icon" alt="#" /></a><span>Admin</span></li>
 
 					),
 					<>
-						<li><Link to="/dashboard">Dashboard</Link></li>
-						<li><button onClick={() => this.logOut()}>Log out</button></li>
+						<li><Link to="/dashboard"><img src="/SVG/dashboard.svg" className="icon" alt="#" /></Link><span>Dashboard</span></li>
+						<li onClick={() => this.logOut()}><img src="/SVG/logout.svg" className="icon" id="logout" alt="#" /><span>Logout</span></li>
 					</>
 				 ]
 				}
@@ -39,6 +42,7 @@ export class HeaderBar extends React.Component {
 }
 
 const mapStateToProps = state => ({
+	cart: state.cart,
 	currentUser: state.auth.currentUser
 });
 

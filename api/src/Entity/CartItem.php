@@ -5,10 +5,15 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
+ * @ApiResource(
+ * normalizationContext={"groups"={"cart_item"}})
  * @ORM\Entity(repositoryClass="App\Repository\CartItemRepository")
- * @ApiResource
+ * @ApiFilter(SearchFilter::class, properties={"cart_item"})
  */
 class CartItem
 {
@@ -16,6 +21,7 @@ class CartItem
 	 * @ORM\Id()
 	 * @ORM\GeneratedValue()
 	 * @ORM\Column(type="integer")
+	 * @Groups({"cart_item"})
 	 */
 	private $id;
 
@@ -27,11 +33,12 @@ class CartItem
 	private $cart;
 
 	/**
-	* @ORM\ManyToOne(targetEntity="App\Entity\ShopItem", inversedBy="cartItems")
+	* @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="cartItems")
 	* @ORM\JoinColumn(nullable=false)
 	* @ApiSubresource
+	* @Groups({"cart_item"})
 	*/
-	private $shopItem;
+	private $product;
 
 	public function getId(): ?int
 	{
@@ -50,14 +57,14 @@ class CartItem
 		return $this;
 	}
 
-	public function getShopItem(): ?ShopItem
+	public function getProduct(): ?Product
 	{
-		return $this->shopItem;
+		return $this->product;
 	}
 
-	public function setShopItem(?ShopItem $shopItem): self
+	public function setProduct(?Product $product): self
 	{
-		$this->shopItem = $shopItem;
+		$this->product = $product;
 
 		return $this;
 	}
