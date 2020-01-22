@@ -16,25 +16,19 @@ export class HeaderBar extends React.Component {
 			<div className="header-bar">
 				<Link to="/"><h1 id="logo">UNIVERSHOP</h1></Link>
 				<ul>
-				<li><Link to="/cart"><img src="/SVG/basket.svg" className="icon" alt="#" /></Link></li>
+				<li><Link to="/cart"><img src="/SVG/basket.svg" className="icon" alt="#" /></Link><span>Panier</span></li>
 				{this.props.currentUser === null ?
 					<>
-
-						<li><Link to="/register">Register</Link></li>
-						<li><Link to="/login">Login</Link></li>
-						<li><Link to="/categories">Categories Galactiques</Link></li>
-
-						<li><Link to="/login"><img src="/SVG/user.svg" className="icon" alt="#" /></Link></li>
+						<li><Link to="/login"><img src="/SVG/user.svg" className="icon" alt="#" /></Link><span>Login</span></li>
 					</>
 				: [
 					this.props.currentUser.roles.includes("ROLE_ADMIN") && (
-						<li><a href="/admin" target="_blank">Admin</a></li>
+						<li><a href="/admin" target="_blank"><img src="/SVG/settings.svg" className="icon" alt="#" /></a><span>Admin</span></li>
 
 					),
 					<>
-						<li><Link to="/dashboard">Dashboard</Link></li>
-						<li><Link to="/cart">Panier</Link></li>
-						<li><button onClick={() => this.logOut()}>Log out</button></li>
+						<li><Link to="/dashboard"><img src="/SVG/dashboard.svg" className="icon" alt="#" /></Link><span>Dashboard</span></li>
+						<li onClick={() => this.logOut()}><img src="/SVG/logout.svg" className="icon" id="logout" alt="#" /><span>Logout</span></li>
 					</>
 				 ]
 				}

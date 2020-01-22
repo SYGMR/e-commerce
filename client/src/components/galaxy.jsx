@@ -5,12 +5,12 @@ import '../index.css';
 export class Galaxy extends Component {
 
 
-  
+
 
 
   componentDidMount() {
 
-    
+
     // Sphere 1
     var sphereGeo1, sphereMaterial1, sphereMesh1;
 
@@ -40,7 +40,8 @@ export class Galaxy extends Component {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.autoClear = false;
-    document.body.appendChild(renderer.domElement)
+    document.body.childNodes[3].appendChild(renderer.domElement)
+
 
     //PARTICULES
 
@@ -234,7 +235,7 @@ export class Galaxy extends Component {
     function showTooltip() {
       if (divElement && latestMouseProjection) {
         divElement[0].style.display = 'block';
-        
+
         //divElement[0].style.opacity = '0.0';
 
         var canvasHalfWidth = renderer.domElement.offsetWidth / 2;
@@ -248,38 +249,38 @@ export class Galaxy extends Component {
         var tootipHeight = divElement[0].offsetHeight;
 
         divElement[0].style.left = `${tooltipPosition.x - tootipWidth / 2}px`;
-        divElement[0].style.top = `${tooltipPosition.y - tootipHeight -70}px`;
+        divElement[0].style.top = `${tooltipPosition.y - tootipHeight - 70}px`;
 
 
         // var position = new THREE.Vector3();
         // var quaternion = new THREE.Quaternion();
         // var scale = new THREE.Vector3();
         // hoveredObj.matrix.decompose(position, quaternion, scale);
-       
+
         divElement[0].innerHTML = "<h2><a href =\"/" + hoveredObj.name + "\">" + hoveredObj.name + "</a></h2>";
         console.log(clicked)
-        if(clicked === false){
-        
+        if (clicked === false) {
+
 
           divElement[0].style.opacity = "1.0";
-        
-      }
-      else {
-        divElement[0].style.opacity = "0"
-      }
 
-        
+        }
+        else {
+          divElement[0].style.opacity = "0"
+        }
+
+
       }
     }
 
     var divElement = document.getElementsByClassName("tooltip");
 
+    console.log('Erreur =>', divElement)
     function hideTooltip() {
-      
+
       if (divElement) {
         divElement[0].style.display = 'none';
         divElement[0].style.opacity = "0";
-
       }
     }
 
@@ -306,35 +307,35 @@ export class Galaxy extends Component {
           latestMouseProjection = intersects[0].point;
           hoveredObj = intersects[0].object;
         }
-        
+
       }
 
       if (!latestMouseProjection && toogle2 === false) {
         clearTimeout(tooltipDisplayTimeout);
         tooltipDisplayTimeout = undefined;
         hideTooltip();
-       
+
       }
 
       if (!tooltipDisplayTimeout && latestMouseProjection) {
-        
+
         tooltipDisplayTimeout = setTimeout(function () {
           tooltipDisplayTimeout = undefined;
           showTooltip();
-        
+
         }, 10);
       }
-    
+
     }
 
 
-    var divDescript= document.getElementsByClassName("description")
+    var divDescript = document.getElementsByClassName("description")
     var blur = document.getElementsByClassName("blur")
 
-    function DescriptionAppear(){
+    function DescriptionAppear() {
       clicked = true
       divElement[0].style.display = 'none';
-      divDescript[0].innerHTML ="<h1><a href =\"/" + hoveredObj.name + "\">" + hoveredObj.name + "</a></h1><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam dolorem molestias nobis eveniet asperiores, vitae nisi deserunt minus, ab vel consectetur? Voluptates, accusantium dolores incidunt labore perspiciatis ipsam iste pariatur</p>";
+      divDescript[0].innerHTML = "<h1><a href =\"/" + hoveredObj.name + "\">" + hoveredObj.name + "</a></h1><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam dolorem molestias nobis eveniet asperiores, vitae nisi deserunt minus, ab vel consectetur? Voluptates, accusantium dolores incidunt labore perspiciatis ipsam iste pariatur</p>";
       divDescript[0].style.display = 'block';
       setTimeout(function () {
         divDescript[0].style.opacity = "1.0";
@@ -342,14 +343,14 @@ export class Galaxy extends Component {
 
     }
 
-    function DescriptionDesap(){
+    function DescriptionDesap() {
       clicked = false
       divDescript[0].style.display = 'none';
 
     }
     var clicked = false
 
-    function check(event){
+    function check(event) {
 
 
       mouse.x = ((event.clientX - canvasBounds.left) / (canvasBounds.right - canvasBounds.left)) * 2 - 1;
@@ -359,24 +360,24 @@ export class Galaxy extends Component {
 
       var intersects = raycaster.intersectObjects(tooltipEnabledObjects, true);
       if (intersects.length > 0) {
-        
+
         toogle2 = true;
         DescriptionAppear();
         console.log(canvasBounds.width)
         //blur[0].style.display = 'block'
         blur[0].style.opacity = 0.4;
-        blur[0].style.width = canvasBounds.width+'px';
-        blur[0].style.height = canvasBounds.height+'px';
-        blur[0].style.top = canvasBounds.top+'px';
+        blur[0].style.width = canvasBounds.width + 'px';
+        blur[0].style.height = canvasBounds.height + 'px';
+        blur[0].style.top = canvasBounds.top + 'px';
         console.log(blur[0].style.width)
-        }
-        else{
-          DescriptionDesap();
-          blur[0].style.opacity = 0;
-          toogle2 = false;
-        }
-        
       }
+      else {
+        DescriptionDesap();
+        blur[0].style.opacity = 0;
+        toogle2 = false;
+      }
+
+    }
 
     function onMouseMove(event) {
       updateMouseCoords(event, mouse);
@@ -388,7 +389,7 @@ export class Galaxy extends Component {
     }
 
 
-    function OnMouseClick(event){
+    function OnMouseClick(event) {
 
       check(event)
     }
@@ -415,9 +416,9 @@ export class Galaxy extends Component {
         sphereMesh1.rotation.z += 0.001;
       }
     }
-   
+
     window.addEventListener('mousemove', onMouseMove, true);
-    window.addEventListener('click',OnMouseClick , true);
+    window.addEventListener('click', OnMouseClick, true);
     render()
   }
   render() {

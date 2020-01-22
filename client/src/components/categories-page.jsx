@@ -23,12 +23,19 @@ export default class CategoriesPages extends React.Component {
     render() {
 
     let categories = this.state.categories.map(category => (
-    <h4 key={category.id}><Link to={`/category/${category.id}`}>{category.name}</Link></h4>
+            <div> 
+                <Link to={`/category/${category.id}`}>
+                <img src='https://fakeimg.pl/300x200/282828/F2F4F3' alt=""/>
+                <h4 key={category.id}>{category.name}</h4>
+                </Link>
+                
+            </div>
     
 ))
         return <>
             <h2>CATEGORIES</h2>
-            {categories}
+            <section id="categoryList">{categories}</section>
+            
             </>
         ;
     }
