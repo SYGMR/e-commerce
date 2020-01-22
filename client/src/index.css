@@ -106,8 +106,8 @@ canvas {
 }
 
 .header-bar li {
-  display: flex;
-  width: 32px;
+  display: grid;
+  grid-auto-flow: column;
   position: relative;
 }
 
@@ -145,7 +145,6 @@ canvas {
 
 .header-bar img.icon{
   transition-duration: 0.5s;
-  display: flex;
   margin: 0 5px;
 }
 
@@ -221,24 +220,21 @@ canvas {
   color: #22333B;
   letter-spacing: 3px;
 }
-.cart > div {
-  display: flex;
-  justify-content: space-around;
-  
+
+.cart {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 0.56em;
+}
+.Cart-Left .items {
+  display: grid;
 }
 
 .Cart-Left, .Cart-Right{
   background: #F2F4F3;
-
   border-radius: 10px;
 }
-.Cart-Left{
-  width: 68%;
-}
-.Cart-Right{
-  width: 28%;
-  padding: 0 30px;
-}
+
 .Cart-Right h3{
   width: 80%;
   margin: 20px auto;

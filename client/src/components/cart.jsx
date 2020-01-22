@@ -25,14 +25,14 @@ class Cart extends React.Component {
             }))
             shopItems = shopItems.filter((shopItem, index, self) => index === self.findIndex(shopItemB => shopItem.id === shopItemB.id))
              return (
-            <div>
+            <React.Fragment>
                 <div className="Cart-Left">
                     <h2>MON PANIER</h2>
+                    <div class="items">
                     {shopItems.map(item => (
-                        <>
                             <CartItem product={{...item}} key={item.id} />
-                        </>
-                    ))}
+                            ))}
+                            </div>
                     
                 </div>
                 <div className="Cart-Right">
@@ -48,7 +48,7 @@ class Cart extends React.Component {
                         <img src="/SVG/credit-card-paypal.svg" alt="#" style={{width: '70px'}} className="credit-card"></img>
                     </div>      
                 </div>
-            </div>
+            </React.Fragment>
         );
         } else {
             return (

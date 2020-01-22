@@ -21,21 +21,12 @@ class CartItem extends React.Component {
                     <div><strong>x : </strong>{this.props.product.quantity} </div>
                     
                 </div>
-                <button onClick={() => {
-                    this.props.dispatch({
+                <img src="/SVG/trash.svg" onClick={() => {
+                     this.props.dispatch({
                         type: "DELETE_PRODUCT",
                         product: this.props.product
                     })
-                    // let cart = JSON.parse(localStorage.getItem("cart"))
-                    // let index = cart.findIndex(shopItemB => product.id === shopItemB.id)
-                    // cart.splice(index, 1)
-                    // this.setState({
-                    //     cart
-                    // })
-                    // // sauvegarde les modifications
-                    // localStorage.setItem("cart", JSON.stringify(cart))
-                }}>delete</button>
-                <img src="/SVG/trash.svg" className="icon" alt='#'/>
+                }} className="icon" alt='#'/>
                 <br></br>
             </div>
         );
