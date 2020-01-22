@@ -119,10 +119,11 @@ export default function() {
 			style={{ backgroundColor: 'black', backgroundImage: 'url(/img/space.jpg)'}}
 			camera={{ position: [-200, 400, 1000], rotation: [-0.5, -0.2, -0.6], fov: 50, near: 100, far: 5000}}
 		>
-			<Suspense fallback={}
-			<Galaxy />
-			<Stars />		
-			<PivotSphere />
+			<Suspense fallback={Loader}>
+				<Galaxy />
+				<Stars />		
+				<PivotSphere />
+			</Suspense>
 		</Canvas>
 	)
 }
