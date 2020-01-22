@@ -13,7 +13,7 @@ extend({ OrbitControls, UnrealBloomPass, EffectComposer, RenderPass })
 
 var hover = false;
 
-function System() {
+export function System() {
 	const ref = useRef()
 	useFrame(() => (ref.current.rotation.y += 0.002))
 	const texture = new THREE.TextureLoader().load('/img/2k_sun.jpg');
@@ -25,7 +25,7 @@ function System() {
 	)
 }
 
-function PivotSphere() {
+export function PivotSphere() {
 	const ref = useRef()
 	useFrame(() => { if(hover === false) 
 				{ref.current.rotation.z += 0.002}
@@ -55,7 +55,7 @@ function getRandomInt(min, max) {
   } 
 
 
-function SolarSystem(props) {
+export function SolarSystem(props) {
 
 	var texturesList = [
 		'/img/planetTexture/2k_jupiter.jpg',
@@ -122,7 +122,6 @@ export default function() {
 		<Canvas
 			style={{ backgroundImage: 'url(/img/space.jpg)'}}
 			camera={{ position: [0,500,1000 ],fov: 50, near: 100, far: 5000}}
-			antialias = {true}
 		>
 			<pointLight position={[1,1,1]}/>
 			<ambientLight intensity={0.2}/>

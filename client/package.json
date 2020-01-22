@@ -11,6 +11,7 @@
 		"font-awesome": "^4.7.0",
 		"jest-junit": "^5.2.0",
 		"jwt-decode": "^2.2.0",
+		"lerp": "^1.0.3",
 		"lodash.get": "^4.4.2",
 		"lodash.has": "^4.5.2",
 		"lodash.mapvalues": "^4.6.0",

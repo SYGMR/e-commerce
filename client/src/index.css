@@ -317,3 +317,28 @@ canvas {
   text-align: center;
   color: #F2F4F3;
 }
+
+.loading {
+  padding: 10px;
+  font-weight: 900;
+  font-size: 3em;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.content {
+  color: white;
+  padding-top: 10px;
+  transform: translate3d(200%, 0, 0);
+  text-align: right;
+}
+
+.content::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 190px;
+  transform: translate3d(-120px, 0, 0);
+  height: 1px;
+  background: white;
+}
