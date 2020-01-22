@@ -10,6 +10,7 @@ import RegistrationPage from './registration-page';
 import LoginPage from './login-page';
 import {refreshAuthToken} from '../actions/auth';
 import CategoriesPage from './categories-page';
+import System from './system-fiber';
 import ShopPage from './shop-page';
 import ProductPage from './products-page';
 import DetailsProduct from './productdetail-page';
@@ -57,11 +58,11 @@ export class App extends React.Component {
 									<Route exact path="/login" component={LoginPage} />
 									<Route exact path="/dashboard" component={DashboardPage} />
 									<Route exact path="/categories" component={CategoriesPage} />
+									<Route exact path='/system-shop' component={System}/>
 									<Route exact path="/category/:id" component={ShopPage} />
 									<Route exact path="/category/:cat_id/shop/:shop_id" component={ProductPage} />
 									<Route exact path="/product/:product_id" component={DetailsProduct} />
 									<Route exact path="/cart" component={CartPage} />
-
 									<Route><div>404 Not found</div></Route>
 								</Switch>
 							</React.Fragment>

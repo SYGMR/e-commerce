@@ -16,10 +16,10 @@ export class HeaderBar extends React.Component {
 			<div className="header-bar">
 				<Link to="/"><h1 id="logo">UNIVERSHOP</h1></Link>
 				<ul>
-				<li><Link to="/cart"><img src="/SVG/basket.svg" className="icon" alt="#" /><small style={{color: 'red'}}>({this.props.cart.filter((item, index, self) => {
+				<li><Link to="/cart"><img src="/SVG/basket.svg" className="icon" alt="#" /><small style={{color: 'red'}}>({/* this.props.cart.filter((item, index, self) => {
 						let findIndex = self.findIndex(itemB => item.id === itemB.id)
 						return findIndex === index
-					}).length})</small></Link><span>Panier</span></li>
+					}) */this.props.cart.length})</small></Link><span>Panier</span></li>
 				{this.props.currentUser === null ?
 					<>
 						<li><Link to="/login"><img src="/SVG/user.svg" className="icon" alt="#" /></Link><span>Login</span></li>

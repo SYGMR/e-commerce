@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
-export default class DetailsProduct extends React.Component {
+class DetailsProduct extends React.Component {
 
     constructor(props) {
         super(props)
@@ -8,6 +9,31 @@ export default class DetailsProduct extends React.Component {
             productdetail: []
         }
     }
+
+    addCart(product) {
+        this.props.dispatch({
+            type: "ADD_PRODUCT",
+            product: {...product, quantity: 1}
+        })
+        // let cart = JSON.parse(localStorage.getItem("cart"))
+        // if (Array.isArray(cart) === false) {
+        //     cart = []
+        // }
+        // cart.push(product)
+        //  // sauvegarde les modifications
+        // localStorage.setItem("cart", JSON.stringify(cart))
+        // fetch(`${process.env.REACT_APP_API_BASE_URL}/cart_items`, {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify({
+        //         cart:"/api/carts/2",
+        //         quantity:1,
+        //         product:`/api/products/${productId}`})
+        // })
+    }
+
 
     componentDidMount(){
         fetch(`${process.env.REACT_APP_API_BASE_URL}/products?id=${this.props.match.params.product_id}`)
@@ -28,6 +54,7 @@ export default class DetailsProduct extends React.Component {
             <h4>{product.description}</h4>
             <h4>{product.price}</h4>
             <h4>{product.images}</h4>
+            <button onClick={() => this.addCart(product)}>add</button>
             </div>
         ))
         return <>
@@ -35,5 +62,6 @@ export default class DetailsProduct extends React.Component {
         </>
         ;
     }
-
 }
+
+export default connect()(DetailsProduct);
