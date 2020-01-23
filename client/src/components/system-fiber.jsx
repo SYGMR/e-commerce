@@ -1,17 +1,20 @@
-import React, {useState, useRef, useEffect, useMemo, Suspense} from 'react';
+import React, {useState, useRef, useEffect, useMemo, Suspense, useContext} from 'react';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import { Canvas, extend, useThree, useFrame, useLoader, Dom} from "react-three-fiber";
 import { TextureLoader } from 'three/src/loaders/TextureLoader.js'
 import {useSpring, a} from 'react-spring/three';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';	
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import * as THREE from "three";
 import { RGBA_ASTC_10x10_Format, Vector3 } from 'three';
 
+import {GalaxyProvider, GalaxyContext} from "../GalaxyContext";
+
+
 extend({ OrbitControls, UnrealBloomPass, EffectComposer, RenderPass })
 
-var hover = false;
+ // var hover = false;
 
 export function System() {
 	const ref = useRef()
@@ -26,15 +29,16 @@ export function System() {
 }
 
 export function PivotSphere() {
+	const [state, setState] = useContext(GalaxyContext);
 	const ref = useRef()
-	useFrame(() => { if(hover === false) 
+	useFrame(() => {
+		console.log(state)
+		if(state === false) 
 				{ref.current.rotation.z += 0.002}
 			})
 	return (
 		<group>		
 			<mesh ref={ref} position={[0, 1, 0]} rotation-x={Math.PI / 2}>
-				
-
 				<planeBufferGeometry attach="geometry" args={[1, 1, 1]} />
 				{[
 					{ name: "Shop 1", position: [400, 1, 40], "rotation-z": Math.PI / 2 },
@@ -57,6 +61,9 @@ function getRandomInt(min, max) {
 
 export function SolarSystem(props) {
 
+	
+	const [state, setState] = useContext(GalaxyContext);
+
 	var texturesList = [
 		'/img/planetTexture/2k_jupiter.jpg',
 		'.img/planetTexture/2k_mars.jpg',
@@ -71,8 +78,8 @@ export function SolarSystem(props) {
 	console.log(randTexture)
 	const dom = useRef()
 	return (
-		<mesh rotation-y={Math.PI / 2} onPointerOver ={e => hover = true }
-										onPointerOut = {e => hover = false}
+		<mesh rotation-y={Math.PI / 2} onPointerOver ={e => setState({hover: true}) }
+										onPointerOut = {e => setState({hover: false})}
 			{...props}
 		>
 			<sphereGeometry attach="geometry" args={[getRandomInt(20,40), 20, 30]} />
@@ -119,16 +126,18 @@ export default function() {
 
 	
 	return (
-		<Canvas
-			style={{ backgroundImage: 'url(/img/space.jpg)'}}
-			camera={{ position: [0,500,1000 ],fov: 50, near: 100, far: 5000}}
-		>
-			<pointLight position={[1,1,1]}/>
-			<ambientLight intensity={0.2}/>
-			<System/>
-			<PivotSphere />
-			<Controls />
-			<Effect />
-		</Canvas>
+		<GalaxyProvider>
+			<Canvas
+				style={{ backgroundImage: 'url(/img/space.jpg)'}}
+				camera={{ position: [0,500,1000 ],fov: 50, near: 100, far: 5000}}
+			>
+				<pointLight position={[1,1,1]}/>
+				<ambientLight intensity={0.2}/>
+				<System/>
+				<PivotSphere />
+				<Controls />
+				<Effect />
+			</Canvas>
+		</GalaxyProvider>
 	)
 }

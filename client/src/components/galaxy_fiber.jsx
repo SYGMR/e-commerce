@@ -1,10 +1,14 @@
-import React, {useState, useRef, useMemo, Suspense} from 'react';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
-import { Canvas, extend, useThree, useFrame, useLoader, Dom} from "react-three-fiber";
+import React, { useState, useEffect, useRef, useMemo, Suspense } from 'react';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { Canvas, extend, useThree, useFrame, useLoader, Dom } from "react-three-fiber";
 import { TextureLoader } from 'three/src/loaders/TextureLoader.js'
-import {useSpring, a} from 'react-spring/three'
+import { useSpring, a } from 'react-spring/three'
 import * as THREE from "three";
 import lerp from "lerp";
+
+const GalaxyContext = React.createContext();
+var click = false;
+var position = new THREE.Vector3();
 
 
 function Galaxy() {
@@ -69,13 +73,27 @@ function SpiralGalaxy(props) {
 function PivotSphere(props) {
 	const ref = useRef()
 	const dom = useRef()
+
+	// useFrame(() => {
+	// 	// const controls = new OrbitControls(camera, gl.domElement);
+	// 	//boundingBox.setFromObject( object );
+	// 	//let center = boundingBox.getCenter();
+	// 	// controls.target = center;
+	// 	camera.lookAt(position)
+	// 	// position.setFromMatrixPosition(ref.current.matrixWorld);
+	// 	// camera.position.x = lerp(camera.position.x,position.x, 0.08)
+	// 	// camera.position.y = lerp(camera.position.y, position.y, 0.08)
+	// 	// camera.position.z = lerp(camera.position.z, position.z, 0.08 )
+	// 	// camera.fov = lerp(camera.fov, 0, 0.08 )
+	// 	camera.updateProjectionMatrix()
+	// })
 	useFrame(() => (ref.current.rotation.z += 0.001))
 	return (
-		<group>		
+		<group>
 			<mesh ref={ref} position={[0, 1, 0]} rotation-x={Math.PI / 2}>
 				<planeBufferGeometry attach="geometry" args={[1, 1, 1]} />
 				// TODO Position should be relative and only updated when pointer is over
-				<Dom ref={dom} style={{ color: 'white', display: "none" }}> 
+				<Dom ref={dom} style={{ color: 'white', display: "none" }}>
 					<h2 style={{ opacity: 0.8 }}>{props.name}</h2>
 				</Dom>
 				{[
@@ -83,10 +101,8 @@ function PivotSphere(props) {
 					{ name: "Category 2", position: [2, 300, -5], "rotation-z": Math.PI / 2 },
 					{ name: "Category 3", position: [30, -400, -5], "rotation-z": Math.PI / 3 },
 					{ name: "Category 4", position: [-300, 0, -5], "rotation-z": Math.PI / 4 },
-					{ name: "Category 5", position: [200, 200, -5], "rotation-z": Math.PI / 5 },
-				].map(props => (
-					<SolarSystem {...props} />
-				))}
+					{ name: "Category 5", position: [200, 200, -5], "rotation-z": Math.PI / 5 }
+				].map(props => (<SolarSystem {...props} />))}
 			</mesh>
 		</group>
 	)
@@ -95,35 +111,23 @@ function PivotSphere(props) {
 
 function SolarSystem(props) {
 	const ref = useRef()
-	let move = false
-	let position = new THREE.Vector3();
 	const { camera } = useThree()
+	//var box = new THREE.Box3()
 	// const [texture] = useLoader(THREE.TextureLoader, [flareImg])
 	const texture = new THREE.TextureLoader().load('/img/flare.png');
-	const dom = useRef()
-	useFrame(() => {
-		if(move === true) {
-			camera.position.x = lerp(camera.position.x, position.x, 0.08)
-			camera.position.y = lerp(camera.position.y, position.y, 0.08)
-			camera.position.z = lerp(camera.position.z, position.z, 0.08 )
-			// camera.fov = lerp(camera.fov, 0, 0.08 )
 
-			camera.updateProjectionMatrix()
-		}
-	})
 	// const ref = useRef();
 	return (
-		<mesh	
+		<mesh
 			ref={ref}
 			{...props}
 			onPointerOver={e => {
 
 			}}
 			onClick={e => {
+				click = true;
 				position.setFromMatrixPosition(ref.current.matrixWorld);
-				console.log(position)
-
-				move = true
+				// camera.lookAt(position)
 				// console.log(props.name)
 			}} // TODO Show tooltip
 		>
@@ -131,55 +135,52 @@ function SolarSystem(props) {
 			<meshBasicMaterial side={THREE.BackSide} depthTest={false} transparent attach="material" map={texture} />
 			<Dom>
 				<div class="content">
-				{props.name}
+					{props.name}
 				</div>
 			</Dom>
 		</mesh>
 	)
 }
 
-function Fallback() {
-	return (
-		<Dom>
-    		<div class="loading">Loading...</div>
-  		</Dom>
-	)
-}
-
-
-const Startup = () => {
+const CameraController = () => {
 	const { camera } = useThree()
-	const ref = useRef()
-	// Zooms the cam from 100 to 7. Since it's inside the Suspense boundary, it will
-	// start doing that once everything's loaded/processed :]
 	useFrame(() => {
-	ref.current.material.opacity = lerp(ref.current.material.opacity, 0, 1)
-	  camera.position.x = lerp(camera.position.x, -200, 0.08)
-	  camera.position.y = lerp(camera.position.y, 400, 0.08)
-	  camera.position.z = lerp(camera.position.z, 1000, 0.08 )
-	  camera.updateProjectionMatrix()
+		// ref.current.material.opacity = lerp(ref.current.material.opacity, 0, 1)
+		if (click === false) {
+			console.log('héhé')
+			camera.position.x = lerp(camera.position.x, -200, 0.08)
+			camera.position.y = lerp(camera.position.y, 400, 0.08)
+			camera.position.z = lerp(camera.position.z, 1000, 0.08)
+			
+		}
+		else {
+			camera.position.x = lerp(camera.position.x, position.x, 0.08)
+			camera.position.y = lerp(camera.position.y, position.y, 0.08)
+			camera.position.z = lerp(camera.position.z, position.z, 0.08)
+			
+		}
+		camera.updateProjectionMatrix()
+
+
 	})
-	return (
-	  <mesh ref={ref} position={ [-200, 400, 1000]} scale={[100, 100, 1]}>
-		<planeBufferGeometry attach="geometry" />
-		<meshBasicMaterial attach="material" color="#0e0e0f" transparent opacity={1} />
-	  </mesh>
-	)
+	
+// Zooms the cam from 100 to 7. Since it's inside the Suspense boundary, it will
+// start doing that once everything's loaded/processed :]
+
+return null
   }
 
-export default function() {
+export default function () {
 	return (
 		<Canvas
-			style={{ backgroundColor: 'black', backgroundImage: 'url(/img/space.jpg)'}}
+			style={{ backgroundColor: 'black', backgroundImage: 'url(/img/space.jpg)' }}
 			// camera={{ position: [-200, 400, 1000], rotation: [-0.5, -0.2, -0.6], fov: 50, near: 100, far: 5000}}
-			camera={{ position: [-1000, 2000, 5000],  rotation: [-0.5, -0.2, -0.6], fov: 50, near: 10, far: 10000}}
+			camera={{ position: [-1000, 2000, 5000], rotation: [-0.5, -0.2, -0.6], fov: 50, near: 10, far: 10000 }}
 		>
-			<Suspense fallback={<Fallback />}>
-				<Galaxy />	
+				<Galaxy />
 				<Stars />
 				<PivotSphere />
-				<Startup />	
-			</Suspense>
+				<CameraController />
 		</Canvas>
 	)
 }
