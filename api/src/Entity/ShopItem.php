@@ -39,13 +39,14 @@ class ShopItem
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Product")
 	 * @ORM\JoinColumn(nullable=false)
 	 * @ApiSubresource
-	 * @Groups({"shop_item"})
+	 * @Groups({"shop_item", "shop"})
 	 */
 	private $product;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Shop", inversedBy="shopItems")
 	 * @ORM\JoinColumn(nullable=false)
+	 * @Groups({"shop_item", "shop"})
 	 */
 	private $shop;
 

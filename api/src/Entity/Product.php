@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "put"={"security"="is_granted('ROLE_ADMIN')"},
  *     }
  * )
- * @ApiFilter(SearchFilter::class, properties={"id"})
+ * @ApiFilter(SearchFilter::class, properties={"id", "name" : "partial"})
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product

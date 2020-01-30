@@ -19,6 +19,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *         "put"={"security"="is_granted('ROLE_ADMIN') or object.merchant == user.merchant"},
  *     }
  * )
+ * 
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "category": "exact"})
  * @ORM\Entity(repositoryClass="App\Repository\ShopRepository")
  */
@@ -115,7 +116,6 @@ class Shop
     {
         if (!$this->items->contains($item)) {
             $this->items[] = $item;
-            $item->addShop($this);
         }        return $this;
 	}    
 	
@@ -123,7 +123,6 @@ class Shop
     {
         if ($this->items->contains($item)) {
             $this->items->removeElement($item);
-            $item->removeShop($this);
 		}        
 		return $this;
     }
