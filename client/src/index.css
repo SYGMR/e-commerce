@@ -212,14 +212,15 @@ canvas {
   border: 9px solid #F2F4F3;
 }
 
-.header-bar .SearchResultItem > a{
-  display: flex;
-  align-items: center;
+.header-bar .SearchResultItem {
+  display: grid;
+  grid-auto-flow: column;
+  padding: 5px 15px 5px 0;
   color: #3c4359;
 }
 
-.header-bar .SearchResultItem {
-  padding: 5px 15px 5px 0;
+.header-bar a {
+  color: #3c4359;
 }
 
 .header-bar .SearchResultItem:hover {

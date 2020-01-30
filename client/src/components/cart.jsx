@@ -44,7 +44,7 @@ class Cart extends React.Component {
                 <div className="cart-error" aria-live="polite">
                     <h3>Ton panier est vide :/</h3>
                     <p>Gooo voyager sur nos principales planete afin de trouver ton bonheur :)</p>
-                    <Link to="/categories"><button>C'est partit !</button></Link>
+                    <Link to="/"><button>C'est partit !</button></Link>
                 </div>
             )
 

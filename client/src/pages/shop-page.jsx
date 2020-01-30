@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import Datasort from 'react-data-sort'
 
-class ProductPage extends React.Component {
+class ShopPage extends React.Component {
 
     constructor(props) {
         super(props)
@@ -63,8 +63,6 @@ class ProductPage extends React.Component {
 
     render() {
         const { sortBy, direction, activePage, searchQuery } = this.state;
-        console.log(activePage)
-        console.log(this.state.shopItems)
         if (this.state.loading === false) {
             if(this.state.shopItems.length >= 1) {
                 return (
@@ -109,6 +107,8 @@ class ProductPage extends React.Component {
                     "Ce shop n'a pas de produit en vente actuellement"
                 )
             }
+        } else if(this.state.loading === true) {
+            return "Loading..."
         } else {
             return null
         }
@@ -226,4 +226,4 @@ function PageIndicator({ pages, activePage = 0}) {
     );
 }
 
-export default connect()(ProductPage);
+export default connect()(ShopPage);

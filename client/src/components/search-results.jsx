@@ -7,21 +7,23 @@ export default class SearchResults extends Component {
 
     static contextType = SearchContext
 
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         if(this.context.loading === false) {
-            return (
-                <div className="resultSearchBar">
-                    {this.context.results.map(result =>
-                        <SearchResult {...result} />
-                    )}
-                </div>
-            )
+            if (this.context.results.length >= 1) {
+                return (
+                    <div ref={this.mount} className="resultSearchBar">
+                        {this.context.results.map(result =>
+                            <SearchResult {...result} />
+                        )}
+                    </div>
+                )
+            } else {
+                return null
+            }
         }
-        else {
+        else if(this.context.loading === true) {
+            return "Loading..."
+        } else {
             return null
         }
     }

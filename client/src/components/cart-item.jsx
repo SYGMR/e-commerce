@@ -1,4 +1,3 @@
-// import React from 'react';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Carousel } from 'react-responsive-carousel';
@@ -12,7 +11,6 @@ class CartItem extends React.Component {
             
              <div className="Product">
                 <div style={{width: 100,textAlign: 'center'}}>
-                    {/* <img style={{width: '100%', borderRadius: 5 }} src={this.props.product.image[0]} /> */}
                     <img src='https://fakeimg.pl/100x100/282828/F2F4F3' alt={this.props.product.name} style={{borderRadius: 15}} />
                     <div className="itemsQuantity">
                         <img src="/SVG/minus-solid.svg" onClick={() => {

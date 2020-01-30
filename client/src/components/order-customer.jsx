@@ -64,10 +64,10 @@ export default class CustomerInformation extends React.Component {
 
                                 </div>
                                 <div class="right">
-                                    <img src="http://i66.tinypic.com/5knfq8.png" alt="visa" />
+                                    {/* <img src="http://i66.tinypic.com/5knfq8.png" alt="visa" />
                                     <img src="http://i67.tinypic.com/14y4p1.png" alt="mastercard" />
                                     <img src="http://i63.tinypic.com/1572ot1.png" alt="amex" />
-                                    <img src="http://i64.tinypic.com/2i92k4p.png" alt="maestro" />
+                                    <img src="http://i64.tinypic.com/2i92k4p.png" alt="maestro" /> */}
                                 </div>
                             </div>
                             <div class="row cardholder">

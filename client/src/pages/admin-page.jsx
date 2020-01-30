@@ -5,7 +5,7 @@ import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_GET_PERMISSIONS, AUTH_CHECK }
 import { Redirect } from 'react-router-dom';
 
 import {connect} from 'react-redux';
-import requiresLogin from './requires-login';
+import requiresLogin from '../components/requires-login';
 
 import { 
 	HydraAdmin, 
@@ -30,7 +30,7 @@ import {
 } from '@material-ui/icons';
 import UsersIcon from '@material-ui/icons/Group';
 
-import * as UsersGuesser from './users-guesser';
+import * as UsersGuesser from '../components/users-guesser';
 
 import {clearAuth} from '../actions/auth';
 

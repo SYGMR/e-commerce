@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import Loading from '../components/loading'
-class DetailsProduct extends React.Component {
+
+class ProductPage extends React.Component {
 
     constructor(props) {
         super(props)
@@ -14,7 +15,6 @@ class DetailsProduct extends React.Component {
     
     componentDidUpdate(prevProps) {
         if(this.props.match.params.product_id !== prevProps.match.params.product_id ) {
-            console.log("test")
             this.fetchCart()
         }
     }
@@ -85,4 +85,4 @@ class DetailsProduct extends React.Component {
     }
 }
 
-export default connect()(DetailsProduct);
+export default connect()(ProductPage);

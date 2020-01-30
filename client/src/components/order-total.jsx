@@ -11,7 +11,7 @@ class Total extends React.Component {
 
     postData(event) {   
         event.preventDefault()
-        this.context.nextStep(this.state)
+        this.context.confirm()
     }
 
     render() {
