@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import Datasort from 'react-data-sort'
 
-class ProductPage extends React.Component {
+class ShopPage extends React.Component {
 
     constructor(props) {
         super(props)
@@ -25,7 +25,6 @@ class ProductPage extends React.Component {
             fetchText(`${process.env.REACT_APP_API_BASE_URL}/shop_items?shop=${this.props.match.params.shop_id}`)
         ]);
         this.setState({ loading: false, shop, shopItems: resShopItems["hydra:member"]});
-        console.log(shop)
     }
 
     addCart(product) {
@@ -63,8 +62,6 @@ class ProductPage extends React.Component {
 
     render() {
         const { sortBy, direction, activePage, searchQuery } = this.state;
-        console.log(activePage)
-        console.log(this.state.shopItems)
         if (this.state.loading === false) {
             if(this.state.shopItems.length >= 1) {
                 return (
@@ -109,6 +106,8 @@ class ProductPage extends React.Component {
                     "Ce shop n'a pas de produit en vente actuellement"
                 )
             }
+        } else if(this.state.loading === true) {
+            return "Loading..."
         } else {
             return null
         }
@@ -161,24 +160,17 @@ function ToggleLink({ children, active, onClick }) {
 
 function Content({ data, addCart }) {
     return (
-        <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr 1fr",
-            gridGap: "15px"
-        }}>
+        <section id="productList">
             {data.map(({ product }) => (
-                <div key={product.id}>
-                    <div><Link to={`/product/${product.id}`}>{product.name}</Link></div>
-                    <div>{product.description}</div>
-                    <div>{product.price}</div>
-                    <button onClick={() => {
-                            addCart({ ...product, quantity: 1 })
-                    }}>Add to cart</button>
-
-                    {/* <div><button onClick={() => this.addCart(product)}>add</button></div> */}
-                </div>
+            <div key={product.id} class="containerProductList">
+                <img src="" style={{width: 100, height: 100}} alt={product.name} />
+                <h2><Link to={`/product/${product.id}`}>{product.name}</Link></h2>
+                <p>{product.description}</p>
+                <h3>{product.price} &euro;</h3>
+                <button className="addToCart" onClick={() => addCart(product)}><img src="/SVG/basket.svg" style={{width: 15, height: 15}} alt={product.name} />Ajouter au panier</button>
+            </div>
             ))}
-        </div>
+        </section>
     );
 }
 
@@ -202,7 +194,6 @@ function GoToPage({ goToPage, pages }) {
 }
 
 function Navigation({ activePage = 0, goToPage, nextPage, prevPage, pages }) {
-    console.log(activePage)
     return (
         <Flex>
             <button disabled={activePage === 0} onClick={() => goToPage(0)}>
@@ -233,73 +224,4 @@ function PageIndicator({ pages, activePage = 0}) {
     );
 }
 
-const App = () => (
-    <ProductPage />
-);
-
-
-
-
-
-// render() {
-
-//     return (
-//         <>
-//             <h2>PRODUCTS</h2>
-//             <Datasort
-//                 paginate
-//                 render={({ data }) => (
-//                     <table>
-//                         <thead>
-//                             <tr>
-//                                 <div>Id</td>
-//                                 <td>Name</td>
-//                                 <td>Description</td>
-//                                 <td>Price</td>
-//                                 <td>Add</td>
-//                             </tr>
-//                         </thead>
-//                         <tbody>
-//                             {this.state.shopItems.map(shopItem => (
-//                                 <tr key={shopItem.product.id}>
-//                                     <td><h2><Link to={`/product/${shopItem.product.id}`}>{shopItem.product.name}</Link></h2></td>
-//                                     <td><h4>{shopItem.product.description}</h4></td>
-//                                     <td><h3>{shopItem.product.price}</h3></td>
-
-//                                     <td><button onClick={() => this.addCart(shopItem.product)}>add</button></td>
-//                                 </tr>
-//                             ))}
-//                         </tbody>
-//                     </table>
-//                 )}
-//             />
-
-//         </>
-//     )
-//         ;
-// }
-
-
-// FUNCTIONELLL
-
-//     const shop_items = this.state.shopItems.map(shopItem => (
-
-//         <div key={shopItem.product.id}>
-//         <h2><Link to={`/product/${shopItem.product.id}`}>{shopItem.product.name}</Link></h2>
-//         <h4>{shopItem.product.description}</h4>
-//         <h3>{shopItem.product.price}</h3>
-
-//         <button onClick={() => this.addCart(shopItem.product)}>add</button>
-//         </div>
-//     ))
-//     return (
-//         <>
-//         <h2>PRODUCTS</h2>
-//         {shop_items}
-//         </>
-//         )
-//     ;
-// }
-// }
-
-export default connect()(ProductPage);
+export default connect()(ShopPage);

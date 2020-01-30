@@ -3,6 +3,7 @@ import CartItem from './cart-item';
 
 import { connect } from 'react-redux';
 import CartTotal from './cart-total';
+import {Link} from 'react-router-dom';
 
 class Cart extends React.Component {
 
@@ -41,7 +42,9 @@ class Cart extends React.Component {
         } else {
             return (
                 <div className="cart-error" aria-live="polite">
-                    <h6>Panier Vide !!!</h6>
+                    <h3>Ton panier est vide :/</h3>
+                    <p>Gooo voyager sur nos principales planete afin de trouver ton bonheur :)</p>
+                    <Link to="/"><button>C'est partit !</button></Link>
                 </div>
             )
 

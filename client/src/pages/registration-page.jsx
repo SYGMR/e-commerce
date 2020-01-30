@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
-import RegistrationForm from './registration-form';
+import RegistrationForm from '../components/registration-form';
 
 export function RegistrationPage(props) {
 	// If we are logged in (which happens automatically when registration

@@ -8,13 +8,17 @@ export default class SearchResults extends Component {
 
     render() {
         if(this.context.loading === false) {
-            return (
-                <div style={{position:"absolute", backgroundColor: "darkslategray"}}>
-                    {this.context.results.map(result =>
-                        <SearchResult {...result} />
-                    )}
-                </div>
-            )
+            if (this.context.results.length >= 1) {
+                return (
+                    <div ref={this.mount} className="resultSearchBar">
+                        {this.context.results.map(result =>
+                            <SearchResult {...result} />
+                        )}
+                    </div>
+                )
+            } else {
+                return null
+            }
         }
         else {
             return null

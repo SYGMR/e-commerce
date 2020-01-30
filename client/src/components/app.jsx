@@ -3,17 +3,19 @@ import {connect} from 'react-redux';
 import {Route, withRouter, Switch} from 'react-router-dom';
 
 import HeaderBar from './header-bar';
-import LandingPage from './landing-page';
-import AdminPage from './admin-page';
-import DashboardPage from './dashboard-page';
-import RegistrationPage from './registration-page';
-import LoginPage from './login-page';
+
+import LandingPage from '../pages/landing-page';
+import AdminPage from '../pages/admin-page';
+import DashboardPage from '../pages/dashboard-page';
+import RegistrationPage from '../pages/registration-page';
+import LoginPage from '../pages/login-page';
+import ShopsPage from '../pages/shops-page';
+import ShopPage from '../pages/shop-page';
+import DetailsProduct from '../pages/product-page';
+import CartPage from '../pages/cart-page'
+import CheckoutPage from '../pages/checkout-page'
+
 import {refreshAuthToken} from '../actions/auth';
-import CategoriesPage from './categories-page';
-import ShopPage from './shop-page';
-import ProductPage from './products-page';
-import DetailsProduct from './productdetail-page';
-import CartPage from './cart-page'
 
 export class App extends React.Component {
 		componentDidUpdate(prevProps) {
@@ -56,10 +58,11 @@ export class App extends React.Component {
 									<Route exact path="/register" component={RegistrationPage} />
 									<Route exact path="/login" component={LoginPage} />
 									<Route exact path="/dashboard" component={DashboardPage} />
-									<Route exact path="/category/:id" component={ShopPage} />
-									<Route exact path="/category/:cat_id/shop/:shop_id" component={ProductPage} />
+									<Route exact path="/category/:id" component={ShopsPage} />
+									<Route exact path="/category/:cat_id/shop/:shop_id" component={ShopPage} />
 									<Route exact path="/product/:product_id" component={DetailsProduct} />
 									<Route exact path="/cart" component={CartPage} />
+									<Route exact path="/checkout" component={CheckoutPage} />
 									<Route><div>404 Not found</div></Route>
 								</Switch>
 							</React.Fragment>

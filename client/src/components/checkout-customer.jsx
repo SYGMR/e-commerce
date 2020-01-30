@@ -1,83 +1,64 @@
 import React from 'react';
-import CartItem from './cart-item';
-import { required, nonEmpty, matches, length, isTrimmed } from '../validators';
-import { connect } from 'react-redux';
-import CartTotal from './cart-total';
-import { registerCard } from '../actions/users';
-import Input from './input';
-import { Field, reduxForm, focus } from 'redux-form';
+import {CheckoutContext} from '../store/CheckoutProvider'
 
+export default class CustomerInformation extends React.Component {
 
-class PaymentMethod extends React.Component {
+    static contextType = CheckoutContext
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context)
         this.state = {
-            cardNumber: "",
-            expiryMonth: "",
-            expiryYear: "2020",
-            cvv: ""
-        };
+            firstname: "",
+            lastname: "",
+            address: "",
+            cardNumber: null,
+            cvv: null,
+            expiryMonth: null,
+            expiryYear: null,
+        }
+    }
+
+
+    postData(event) {   
+        event.preventDefault()
+        this.context.nextStep(this.state)
     }
 
     handleChange(event) {
         this.setState({
-            [event.target.name] : event.target.value,
-        });
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-    }
-
-    onSubmit(values) {          
-        console.log("test")
-
-        const {cardNumber, expiryMonth, expiryYear, cvv} = values;
-        const cardInfo = {cardNumber, expiryMonth, expiryYear, cvv};
-        if(this.props.user !== null) {
-            cardInfo.user = "/api/users/" + this.props.user.id
-        }
-        return this.props
-            .dispatch(registerCard(cardInfo))
+            [event.target.name] : event.target.value
+        })
     }
 
     render() {
-
         return (
-            <>
-            <form onSubmit={this.handleSubmit.bind(this)}>
+            <form onSubmit={this.postData.bind(this)}>
                 <div class="container">
+                <div class="info">
+                    {/** MODIF */}
+                    <label for="firstname">Prenom</label>
+                    <input value={this.state.firstname} onChange={this.handleChange.bind(this)} name="firstname" id="firstname" type="text"/>
+                    <label for="lastname">Nom</label>
+                    <input value={this.state.lastname} onChange={this.handleChange.bind(this)} name="lastname" id="lastname" type="text"/>
+                    <label for="address">Adresse</label>
+                    <input value={this.state.address} onChange={this.handleChange.bind(this)} name="address" id="address" type="text"/>
+                    </div>
                     <div class="card__container">
                         <div class="card">
-                            <div class="row paypal">
-                                <div class="left">
-                 
-                                
-
-
-                                </div>
-                                <div class="right">
-                                    <img src="http://i68.tinypic.com/2rwoj6s.png" alt="paypal" />
-                                </div>
-                            </div>
                             <div class="row credit">
                                 <div class="left">
 
 
-                                    {/** MODIF */}
-                                    <input onChange={this.handleChange.bind(this)} id="cd" type="radio" name="payment" />
-                                    <div class="radio"></div>
                                     <label for="cd">Debit/ Credit Card</label>
 
 
 
                                 </div>
                                 <div class="right">
-                                    <img src="http://i66.tinypic.com/5knfq8.png" alt="visa" />
+                                    {/* <img src="http://i66.tinypic.com/5knfq8.png" alt="visa" />
                                     <img src="http://i67.tinypic.com/14y4p1.png" alt="mastercard" />
                                     <img src="http://i63.tinypic.com/1572ot1.png" alt="amex" />
-                                    <img src="http://i64.tinypic.com/2i92k4p.png" alt="maestro" />
+                                    <img src="http://i64.tinypic.com/2i92k4p.png" alt="maestro" /> */}
                                 </div>
                             </div>
                             <div class="row cardholder">
@@ -86,7 +67,7 @@ class PaymentMethod extends React.Component {
 
                                     {/** MODIF */}
                                     <label for="cardholdername">Name</label>
-                                    <input onChange={this.handleChange.bind(this)} placeholder="e.g. Richard Bovell" id="cardholdername" type="text" />
+                                    <input value={this.state.cardholdername} onChange={this.handleChange.bind(this)} placeholder="e.g. Richard Bovell" id="cardholdername" type="text" />
 
                                 </div>
                             </div>
@@ -96,8 +77,8 @@ class PaymentMethod extends React.Component {
 
                                     {/** MODIF */}
                                     <label for="cardnumber">Card number</label>
-                                    <input onChange={this.handleChange.bind(this)} name="cardNumber" id="cardNumber" type="text" pattern="[0-9]{16,19}" maxlength="19" placeholder="8888-8888-8888-8888"
-                                        value={this.state.card} />
+                                    <input value={this.state.cardNumber} onChange={this.handleChange.bind(this)} name="cardNumber" id="cardNumber" type="text" pattern="[0-9]{16,19}" maxlength="19" placeholder="8888-8888-8888-8888"
+                                        />
 
 
 
@@ -109,7 +90,7 @@ class PaymentMethod extends React.Component {
 
 
                                     {/** MODIF */}
-                                    <select onChange={this.handleChange.bind(this)} name="expiryMonth" id="expiry-date" value={this.state.expiryMonth}>
+                                    <select value={this.state.expiryMonth} onChange={this.handleChange.bind(this)} name="expiryMonth" id="expiry-date">
                                         <option>MM</option>
                                         <option value="1">01</option>
                                         <option value="2">02</option>
@@ -127,7 +108,7 @@ class PaymentMethod extends React.Component {
 
 
                                     {/** MODIF */}
-                                    <select name="expiryYear" id="expiry-date" onChange={this.handleChange.bind(this)} value={this.state.expiryYear}>
+                                    <select value={this.state.expiryYear} onChange={this.handleChange.bind(this)} name="expiryYear" id="expiry-date">
                                         <option>YYYY</option>
                                         <option value="2016">2016</option>
                                         <option value="2017">2017</option>
@@ -156,7 +137,7 @@ class PaymentMethod extends React.Component {
 
                                     {/** MODIF */}
                                     <label for="cvv">CVC/CVV</label>
-                                    <input name="cvv" onChange={this.handleChange.bind(this)} type="text" maxlength="4" placeholder="123" value={this.state.cvv} />
+                                    <input value={this.state.cvv} onChange={this.handleChange.bind(this)} name="cvv" type="text" maxlength="4" placeholder="123" />
 
 
 
@@ -170,20 +151,13 @@ class PaymentMethod extends React.Component {
 
 
                         {/** MODIF */}
-                        <button>Confirm and Pay</button>
+                        <button>Suivant</button>
 
                         </div>
                     </div>
                 </form>
-            </>
-
         )
 
     }
 }
 
-export default reduxForm({
-    form: 'card',
-    onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('card', Object.keys(errors)[0]))
-})(PaymentMethod);
