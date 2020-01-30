@@ -1,13 +1,42 @@
 import React from 'react';
 import { connect } from 'react-redux'
-
+import Loading from '../components/loading'
 class DetailsProduct extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
+            loading: null,
             productdetail: []
         }
+    }
+
+    
+    componentDidUpdate(prevProps) {
+        if(this.props.match.params.product_id !== prevProps.match.params.product_id ) {
+            console.log("test")
+            this.fetchCart()
+        }
+    }
+
+
+    componentDidMount(){
+        this.fetchCart()
+    }
+
+    fetchCart() {
+        this.setState({
+            loading: true,
+        })     
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/products?id=${this.props.match.params.product_id}`)
+        .then(res => res.json())
+        .then(res => {
+             this.setState({
+                 loading: false,
+                productdetail: res["hydra:member"]
+             })             
+             console.log(res)
+        })
     }
 
     addCart(product) {
@@ -34,33 +63,25 @@ class DetailsProduct extends React.Component {
         // })
     }
 
-
-    componentDidMount(){
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/products?id=${this.props.match.params.product_id}`)
-        .then(res => res.json())
-        .then(res => {
-             this.setState({
-                productdetail: res["hydra:member"]
-             })             
-             console.log(res)
-        })
-    }
-
     render() {
-  
-        const Products = this.state.productdetail.map(product => (
-            <div key={product.id}>
-            <h2>{product.name}</h2>
-            <h4>{product.description}</h4>
-            <h4>{product.price}</h4>
-            <h4>{product.images}</h4>
-            <button onClick={() => this.addCart(product)}>add</button>
-            </div>
-        ))
-        return <>
-        {Products}
-        </>
-        ;
+        if(this.state.loading === false) {
+            const Products = this.state.productdetail.map(product => (
+                <div key={product.id}>
+                <h2>{product.name}</h2>
+                <h4>{product.description}</h4>
+                <h4>{product.price}</h4>
+                <h4>{product.images}</h4>
+                <button className="addToCart" onClick={() => this.addCart(product)}>Ajouter au panier</button>
+                </div>
+            ))
+            return <>
+            {Products}
+            </>
+            ;
+        } else {
+            return (<Loading />)
+        }
+        
     }
 }
 

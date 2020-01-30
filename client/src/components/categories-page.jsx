@@ -35,7 +35,6 @@ export default class CategoriesPages extends React.Component {
         return <>
             <h2>CATEGORIES</h2>
             <section id="categoryList">{categories}</section>
-            
             </>
         ;
     }

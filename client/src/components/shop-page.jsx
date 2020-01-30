@@ -22,11 +22,17 @@ export default class ShopPage extends React.Component {
 
     render() {
         let shops = this.state.shops.map(shop => (
-            <h4  key={shop.id}><Link to={`/category/${this.props.match.params.id}/shop/${shop.id}`}>{shop.name}</Link></h4>
+            <div> 
+            <Link to={`/category/${this.props.match.params.id}/shop/${shop.id}`}>
+            <img src='https://fakeimg.pl/120x120/282828/F2F4F3' alt=""/>
+            <h4 key={shop.id}>{shop.name}</h4>
+            </Link>
+            
+        </div>
         ))
         return <>
         <h2>SHOPS</h2>
-        {shops}
+        <section id="shopList">{shops}</section>
         </>
         ;
     }

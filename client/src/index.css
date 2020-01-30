@@ -6,7 +6,7 @@
 }
 
 body{
-  background-color: #22333B;
+  background-color: #3c4359;
 }
 /*************************************/
 /***********    GALAXY   ************/
@@ -215,7 +215,7 @@ canvas {
 .header-bar .SearchResultItem > a{
   display: flex;
   align-items: center;
-  color: #22333B;
+  color: #3c4359;
 }
 
 .header-bar .SearchResultItem {
@@ -317,7 +317,7 @@ canvas {
 .cart h2{
   text-align: center;
   padding: 30px 0;
-  color: #22333B;
+  color: #3c4359;
   letter-spacing: 3px;
 }
 

@@ -12,7 +12,7 @@ export default class SearchResults extends Component {
     }
 
     render() {
-        if(this.context.loading === true) {
+        if(this.context.loading === false) {
             return (
                 <div className="resultSearchBar">
                     {this.context.results.map(result =>

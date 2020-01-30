@@ -168,7 +168,7 @@ function Content({ data, addCart }) {
                 <h2><Link to={`/product/${product.id}`}>{product.name}</Link></h2>
                 <p>{product.description}</p>
                 <h3>{product.price} &euro;</h3>
-                <button className="addToCart" onClick={() => this.addCart(product)}><img src="/SVG/basket.svg" style={{width: 15, height: 15}} alt={product.name} />Ajouter au panier</button>
+                <button className="addToCart" onClick={() => addCart(product)}><img src="/SVG/basket.svg" style={{width: 15, height: 15}} alt={product.name} />Ajouter au panier</button>
             </div>
             ))}
         </section>

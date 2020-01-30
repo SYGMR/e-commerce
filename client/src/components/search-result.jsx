@@ -14,30 +14,28 @@ class SearchResult extends Component {
     addCart(product) {
         this.props.dispatch({
             type: "ADD_PRODUCT",
-            product: {...product, quantity: 1}
+            product: { ...product, quantity: 1 }
         })
     }
 
     render() {
-        let {id, name, price, description} = this.props
+        let { id, name, price, description } = this.props
         return (
-            <div>
-                <div>
-                    <Link to={`/product/${id}`} />
-                </div>
-                <div>
-                    {name}
-                </div>
-                <div>
-                    {price}
-                </div>
-                <div>
-                    {description}
-                </div>
-                <div>
-                    <button onClick={() => this.addCart(this.props)}>add</button>
-                </div>
+            <div className="SearchResultItem">
+                <a href="#">
+                    <img style={{ marginRight: 15, marginLeft: 5, borderRadius: 15 }} src='https://fakeimg.pl/80x80/282828/F2F4F3' alt="" />
+                    <div>
+                        <h4>{name}</h4>
+                        <p style={{ fontSize: '0.7rem', textAlign: "justify", margin: "5px 0 11px" }}>{description}</p>
+                        <div >
+                            <p style={{ float: "left" }}>{price} &euro;</p>
+                            <button className="addToCart" onClick={() => this.addCart(this.props)}>Ajouter au panier</button>
+                        </div>
+                    </div>
+                </a>
             </div>
+
+
         )
     }
 }
