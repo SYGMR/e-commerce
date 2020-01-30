@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import SearchBar from './search-bar'
 import SearchResult from './search-result'
 import {SearchContext} from '../store/SearchProvider'
 
@@ -10,7 +9,7 @@ export default class SearchResults extends Component {
     render() {
         if(this.context.loading === false) {
             return (
-                <div style={{position:"absolute"}}>
+                <div style={{position:"absolute", backgroundColor: "darkslategray"}}>
                     {this.context.results.map(result =>
                         <SearchResult {...result} />
                     )}
