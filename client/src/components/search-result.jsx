@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import SearchBar from './search-bar'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 
 
 class SearchResult extends Component {
-    
+
     constructor(props) {
         super(props)
     }

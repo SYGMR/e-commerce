@@ -161,24 +161,17 @@ function ToggleLink({ children, active, onClick }) {
 
 function Content({ data, addCart }) {
     return (
-        <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr 1fr",
-            gridGap: "15px"
-        }}>
+        <section id="productList">
             {data.map(({ product }) => (
-                <div key={product.id}>
-                    <div><Link to={`/product/${product.id}`}>{product.name}</Link></div>
-                    <div>{product.description}</div>
-                    <div>{product.price}</div>
-                    <button onClick={() => {
-                            addCart({ ...product, quantity: 1 })
-                    }}>Add to cart</button>
-
-                    {/* <div><button onClick={() => this.addCart(product)}>add</button></div> */}
-                </div>
+            <div key={product.id} class="containerProductList">
+                <img src="" style={{width: 100, height: 100}} alt={product.name} />
+                <h2><Link to={`/product/${product.id}`}>{product.name}</Link></h2>
+                <p>{product.description}</p>
+                <h3>{product.price} &euro;</h3>
+                <button className="addToCart" onClick={() => this.addCart(product)}><img src="/SVG/basket.svg" style={{width: 15, height: 15}} alt={product.name} />Ajouter au panier</button>
+            </div>
             ))}
-        </div>
+        </section>
     );
 }
 
@@ -232,74 +225,5 @@ function PageIndicator({ pages, activePage = 0}) {
         </div>
     );
 }
-
-const App = () => (
-    <ProductPage />
-);
-
-
-
-
-
-// render() {
-
-//     return (
-//         <>
-//             <h2>PRODUCTS</h2>
-//             <Datasort
-//                 paginate
-//                 render={({ data }) => (
-//                     <table>
-//                         <thead>
-//                             <tr>
-//                                 <div>Id</td>
-//                                 <td>Name</td>
-//                                 <td>Description</td>
-//                                 <td>Price</td>
-//                                 <td>Add</td>
-//                             </tr>
-//                         </thead>
-//                         <tbody>
-//                             {this.state.shopItems.map(shopItem => (
-//                                 <tr key={shopItem.product.id}>
-//                                     <td><h2><Link to={`/product/${shopItem.product.id}`}>{shopItem.product.name}</Link></h2></td>
-//                                     <td><h4>{shopItem.product.description}</h4></td>
-//                                     <td><h3>{shopItem.product.price}</h3></td>
-
-//                                     <td><button onClick={() => this.addCart(shopItem.product)}>add</button></td>
-//                                 </tr>
-//                             ))}
-//                         </tbody>
-//                     </table>
-//                 )}
-//             />
-
-//         </>
-//     )
-//         ;
-// }
-
-
-// FUNCTIONELLL
-
-//     const shop_items = this.state.shopItems.map(shopItem => (
-
-//         <div key={shopItem.product.id}>
-//         <h2><Link to={`/product/${shopItem.product.id}`}>{shopItem.product.name}</Link></h2>
-//         <h4>{shopItem.product.description}</h4>
-//         <h3>{shopItem.product.price}</h3>
-
-//         <button onClick={() => this.addCart(shopItem.product)}>add</button>
-//         </div>
-//     ))
-//     return (
-//         <>
-//         <h2>PRODUCTS</h2>
-//         {shop_items}
-//         </>
-//         )
-//     ;
-// }
-// }
 
 export default connect()(ProductPage);

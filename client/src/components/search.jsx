@@ -6,12 +6,12 @@ import SearchResults from './search-results'
 export default class Search extends Component {
     render() {
         return (
+            <div id="containerSearch">
             <SearchProvider>
-                <div style={{position: "relative"}}>
-                    <SearchBar />
-                    <SearchResults />
-                </div>
+                <SearchBar />
+                <SearchResults />
             </SearchProvider>
+            </div>
         )
     }
 }
