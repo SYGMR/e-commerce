@@ -15,8 +15,6 @@ import { store, GalaxyProvider } from '../store/GalaxyProvider';
 
 extend({ OrbitControls, UnrealBloomPass, EffectComposer, RenderPass })
 
-// var hover = false;
-
 function Content(props) {
 	const globalState = useContext(store);
 	const { dispatch } = globalState;
