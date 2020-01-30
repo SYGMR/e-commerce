@@ -1,19 +1,25 @@
-import React, {useState, useRef, useEffect, useMemo, Suspense} from 'react';
+import React, {useState, useRef, useEffect, useMemo, Suspense, useContext} from 'react';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import { Canvas, extend, useThree, useFrame, useLoader, Dom} from "react-three-fiber";
 import { TextureLoader } from 'three/src/loaders/TextureLoader.js'
 import {useSpring, a} from 'react-spring/three';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';	
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import lerp from 'lerp';
 import * as THREE from "three";
-import { RGBA_ASTC_10x10_Format, Vector3 } from 'three';
+
+import { store, GalaxyProvider} from './GalaxyContext';
+import { Shop } from '@material-ui/icons';
+
 
 extend({ OrbitControls, UnrealBloomPass, EffectComposer, RenderPass })
 
-var hover = false;
+ // var hover = false;
 
-function System() {
+
+export function System() {
+	
 	const ref = useRef()
 	useFrame(() => (ref.current.rotation.y += 0.002))
 	const texture = new THREE.TextureLoader().load('/img/2k_sun.jpg');
@@ -25,25 +31,28 @@ function System() {
 	)
 }
 
-function PivotSphere() {
+
+
+function randomIntFromInterval(min, max) { // min and max included 
+	return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+//{ name: "Shop 1", position: [400, 1, 40], "rotation-z": Math.PI / 2 },
+export function PivotSphere(props) {
+	console.log(props.shops)
+
+	const globalState = useContext(store);
 	const ref = useRef()
-	useFrame(() => { if(hover === false) 
+	useFrame(() => {
+		if (globalState.state.hover === false) 
 				{ref.current.rotation.z += 0.002}
 			})
+
 	return (
 		<group>		
-			<mesh ref={ref} position={[0, 1, 0]} rotation-x={Math.PI / 2}>
-				
-
+			<mesh  ref={ref} position={[0, 1, 0]} rotation-x={Math.PI / 2}>
 				<planeBufferGeometry attach="geometry" args={[1, 1, 1]} />
-				{[
-					{ name: "Shop 1", position: [400, 1, 40], "rotation-z": Math.PI / 2 },
-					{ name: "Shop 2", position: [2, 300, 40], "rotation-z": Math.PI / 2 },
-					{ name: "Shop 3", position: [30, -400, 40], "rotation-z": Math.PI / 2 },
-					{ name: "Shop 4", position: [-300, 0, 40], "rotation-z": Math.PI / 2 },
-					{ name: "Shop 5", position: [200, 200, 40], "rotation-z": Math.PI / 2 },
-				].map(props => (
-					<SolarSystem {...props} />
+				{props.shops.map(shop => (
+					<Planet cat = {props.categorie} idshop= {shop.id} name={shop.name} position ={[randomIntFromInterval(400,-400),randomIntFromInterval(400,-400),0]} {...props}/>
 				))}
 			</mesh>
 		</group>
@@ -55,7 +64,12 @@ function getRandomInt(min, max) {
   } 
 
 
-function SolarSystem(props) {
+export function Planet(props) {
+
+	
+	const globalState = useContext(store);
+	const { dispatch } = globalState;
+	const ref = useRef()
 
 	var texturesList = [
 		'/img/planetTexture/2k_jupiter.jpg',
@@ -68,68 +82,83 @@ function SolarSystem(props) {
 	var randIndex = getRandomInt(0, texturesList.length - 1);
 
 	var randTexture = new THREE.TextureLoader().load(texturesList[randIndex]);
-	console.log(randTexture)
 	const dom = useRef()
 	return (
-		<mesh rotation-y={Math.PI / 2} onPointerOver ={e => hover = true }
-										onPointerOut = {e => hover = false}
+		<mesh rotation-y={Math.PI / 2} 
+		ref={ref}
+		onClick={e=>{
+			globalState.state.position.setFromMatrixPosition(ref.current.matrixWorld);
+			dispatch({type: "zoom", zoom : true})}}
 			{...props}
+
 		>
 			<sphereGeometry attach="geometry" args={[getRandomInt(20,40), 20, 30]} />
-			<meshLambertMaterial attach="material" map ={randTexture} />
+			<meshLambertMaterial attach="material" color='grey' />
+			<Dom>
+				<div onClick={e=>{globalState.state.position.setFromMatrixPosition(ref.current.matrixWorld);
+									dispatch({type: "zoom", zoom : true})
+									e.preventDefault(); //will stop the link href to call the blog page
+
+									setTimeout(function () {
+										window.location.href = '/category/'+props.cat+'/shop/'+props.idshop; //will redirect to your blog page (an ex: blog.html)
+									 }, 700); //will call the function after 2 secs.
+								 
+									}}
+									style={{cursor:'pointer'}} className="content-planet-sdauhsdayudash">
+				<a className="categories">{props.name}</a>
+				</div>
+			</Dom>
 		</mesh>
 	)
 }
-const  Effect = () =>{
-	const composer = useRef();
-	const { scene, gl, size, camera } = useThree()
-  const aspect = useMemo(() => new THREE.Vector2(size.width, size.height), [size])
-  useEffect(() => void composer.current.setSize(size.width, size.height), [size])
-  useFrame(() => composer.current.render(), 1)
-  return(
-
-	<effectComposer ref={composer} args={[gl]}>
-			<renderPass attachArray="passes" scene={scene} camera={camera} />
-			<unrealBloomPass attachArray="passes" args={[aspect, 0.4, 0, 0.1]} />
-	</effectComposer>
-  )
-}
 
 
-const Controls = () => {
-	const orbitRef = useRef()
-	const { camera, gl } = useThree()
+
+
+const Controls = (props) => {
+	const globalState = useContext(store);
+	const { camera} = useThree()
   
 	useFrame(() => {
-	  orbitRef.current.update()
+		// ref.current.material.opacity = lerp(ref.current.material.opacity, 0, 1)
+		if (globalState.state.zoom === false) {
+			camera.position.x = lerp(camera.position.x, -150, 0.08)
+			camera.position.y = lerp(camera.position.y, 300, 0.08)
+			camera.position.z = lerp(camera.position.z, 750, 0.08)
+			
+		}
+		else {
+			camera.position.x = lerp(camera.position.x, globalState.state.position.x, 0.08)
+			camera.position.y = lerp(camera.position.y, globalState.state.position.y, 0.08)
+			camera.position.z = lerp(camera.position.z, globalState.state.position.z, 0.08)
+			
+		}
+		camera.updateProjectionMatrix()
 	})
   
 	return (
-	  <orbitControls
-	  	enableRotate={false}
-		enablePan={false}
-		target = {[0,0,0]}
-		args={[camera, gl.domElement]}
-		ref={orbitRef}
-	  />
+	null
 	)
   }
 
-export default function() {
+export default function(props) {
 
 	
 	return (
 		<Canvas
-			style={{ backgroundImage: 'url(/img/space.jpg)'}}
-			camera={{ position: [0,500,1000 ],fov: 50, near: 100, far: 5000}}
-			antialias = {true}
+		onCreated={({camera})=>camera.lookAt(0,0,0)}
+		style={{ backgroundImage: 'url(/img/space.jpg)'}}
+		camera={{ position: [-1000, 2000, 5000],fov: 50, near: 100, far: 5000}}
+		resize={{scroll: false }}
 		>
+		<GalaxyProvider>
 			<pointLight position={[1,1,1]}/>
 			<ambientLight intensity={0.2}/>
 			<System/>
-			<PivotSphere />
-			<Controls />
-			<Effect />
-		</Canvas>
+			<PivotSphere shops={props.shops}
+						categorie={props.categorie} />
+			<Controls/>
+		</GalaxyProvider>
+			</Canvas>
 	)
 }

@@ -466,3 +466,25 @@ canvas {
   text-align: center;
   color: #F2F4F3;
 }
+
+
+.loading {
+  padding: 10px;
+  font-weight: 900;
+  font-size: 3em;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.content-planet-sdauhsdayudash {
+  color: white;
+  transform: translate(16px,-25px);
+  border-bottom: white 1px solid;
+  width: 200px;
+  text-align: right;
+  padding-bottom: 5px;
+
+}
+.categories
+{
+  color: #F2F4F3;
+}

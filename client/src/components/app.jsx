@@ -10,7 +10,7 @@ import RegistrationPage from './registration-page';
 import LoginPage from './login-page';
 import {refreshAuthToken} from '../actions/auth';
 import CategoriesPage from './categories-page';
-import ShopPage from './shop-page';
+import ShopPage from './system-page';
 import ProductPage from './products-page';
 import DetailsProduct from './productdetail-page';
 import CartPage from './cart-page'
