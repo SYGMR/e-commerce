@@ -62,8 +62,6 @@ export class App extends React.Component {
 									<Route exact path="/product/:product_id" component={DetailsProduct} />
 									<Route exact path="/cart" component={CartPage} />
 									<Route exact path="/checkout" component={CheckoutPage} />
-
-								
 									<Route><div>404 Not found</div></Route>
 								</Switch>
 							</React.Fragment>
