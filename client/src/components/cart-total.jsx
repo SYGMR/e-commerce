@@ -1,14 +1,7 @@
 // import React from 'react';
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Carousel } from 'react-responsive-carousel';
-import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
+import React from 'react';
 import { connect } from 'react-redux';
-import CartItem from './cart-item';
-import Cart from './cart';
 import {Link} from 'react-router-dom';
-
-
 
 class CartTotal extends React.Component {
     render() {

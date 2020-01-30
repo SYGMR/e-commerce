@@ -27,7 +27,6 @@ export const registerUser = user => dispatch => {
 
 export const registerCustomer = customer => (dispatch, getState) => {
 	const authToken = getState().auth.token;
-	console.log(customer);
 	return fetch(`${process.env.REACT_APP_API_BASE_URL}/customers`, {
 		method: 'POST',
 		headers: {

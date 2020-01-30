@@ -35,7 +35,6 @@ class ProductPage extends React.Component {
                  loading: false,
                 productdetail: res["hydra:member"]
              })             
-             console.log(res)
         })
     }
 

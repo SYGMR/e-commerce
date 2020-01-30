@@ -12,12 +12,9 @@ export default class CheckoutProvider extends Component {
             customer: {},
             shipping: {},
             nextStep: data => {
-                console.log("next step", data)
                 if(this.state.step === 0) {
-                    console.log("Changing customer data")
                     this.state.customer = data
                 } if(this.state.step === 1) {
-                    console.log("Changing shipping data")
                     this.state.shipping = data
                 }
                 this.setState(prevState => ({

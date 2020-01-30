@@ -1,13 +1,5 @@
 import React from 'react';
-import CartItem from './cart-item';
-import { required, nonEmpty, matches, length, isTrimmed } from '../validators';
-import { connect } from 'react-redux';
-import CartTotal from './cart-total';
-import { registerCard } from '../actions/users';
-import Input from './input';
-import { Field, reduxForm, focus } from 'redux-form';
 import {CheckoutContext} from '../store/CheckoutProvider'
-
 
 export default class CustomerInformation extends React.Component {
 
@@ -39,7 +31,6 @@ export default class CustomerInformation extends React.Component {
     }
 
     render() {
-        console.log(this.context.cartItems)
         return (
             <form onSubmit={this.postData.bind(this)}>
                 <div class="container">

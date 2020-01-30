@@ -1,4 +1,4 @@
-import React, { createContext, Component } from 'react'
+import React, { Component } from 'react'
 import SearchBar from './search-bar'
 import SearchProvider from '../store/SearchProvider'
 import SearchResults from './search-results'
@@ -13,8 +13,6 @@ export default class Search extends Component {
     }
 
     handleClickOutside(event) {
-        console.log(this.mount)
-        console.log(event.target)
         if (this.mount && this.mount.contains(event.target) === true) {
             this.setState({
                 showResults: true

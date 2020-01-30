@@ -25,7 +25,6 @@ class ShopPage extends React.Component {
             fetchText(`${process.env.REACT_APP_API_BASE_URL}/shop_items?shop=${this.props.match.params.shop_id}`)
         ]);
         this.setState({ loading: false, shop, shopItems: resShopItems["hydra:member"]});
-        console.log(shop)
     }
 
     addCart(product) {
@@ -195,7 +194,6 @@ function GoToPage({ goToPage, pages }) {
 }
 
 function Navigation({ activePage = 0, goToPage, nextPage, prevPage, pages }) {
-    console.log(activePage)
     return (
         <Flex>
             <button disabled={activePage === 0} onClick={() => goToPage(0)}>

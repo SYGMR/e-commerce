@@ -1,7 +1,5 @@
-// import React from 'react';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
 import {CheckoutContext} from '../store/CheckoutProvider'
 
 
@@ -9,28 +7,30 @@ class Total extends React.Component {
 
     static contextType = CheckoutContext
 
-    postData(event) {   
+    confirm(event) {   
         event.preventDefault()
-        this.context.confirm()
+        alert("Coming soon")
     }
 
     render() {
         let total = this.context.cartItems.map(item => item.price * item.quantity).reduce((accumulator, currentValue) => (accumulator + currentValue)) 
         return (
             <div>
-                <form onSubmit={this.postData.bind(this)}>
+                <form onSubmit={this.confirm.bind(this)}>
                      <h4>Detaille de Votre Command</h4>
                      <div>
-                        <h4>{this.context.customer.firstname}</h4>
+                         Prenom: {this.context.customer.firstname}
                     </div>
                     <div>
-                        <h4>{this.context.customer.lastname}</h4>
+                         Nom: {this.context.customer.lastname}
                     </div>
                     <div>
-                        <h4>{this.context.customer.lastname}</h4>
+                        Address: {this.context.customer.address}
                     </div>
                     <div>
-
+                        Type de livraison: {this.context.shipping.courier}
+                    </div>
+                    <div>
                     {/* <h1>{this.props.product.name}</h1> 
                     <span><strong>Prix unité: </strong> {this.props.product.price} &euro;</span><br></br>
                     <span><strong>Description : </strong>{this.props.product.description} </span>

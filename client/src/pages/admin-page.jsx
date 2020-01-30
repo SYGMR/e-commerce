@@ -78,7 +78,6 @@ const authProvider = function(type, params) {
 		return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
 	}
 	if (type === AUTH_GET_PERMISSIONS) { // TODO
-		console.log(this.props.roles)
 		return Promise.resolve(this.props.roles);
 	}
 	return Promise.reject('Unknown method');

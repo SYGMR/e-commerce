@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import SearchBar from './search-bar'
 import SearchResult from './search-result'
 import {SearchContext} from '../store/SearchProvider'
 
@@ -21,9 +20,7 @@ export default class SearchResults extends Component {
                 return null
             }
         }
-        else if(this.context.loading === true) {
-            return "Loading..."
-        } else {
+        else {
             return null
         }
     }

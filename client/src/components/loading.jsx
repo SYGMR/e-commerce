@@ -1,6 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import loading from '../loading.css';
+import '../loading.css';
 
 export default class Loading extends React.Component {
     render() {

@@ -8,22 +8,29 @@ export default class SearchProvider extends Component {
 		super(props);
 		this.state = {
             loading: null,
+            timeout: null,
             results: [],
             fetchResults: this.fetchResults.bind(this),
-			setResults: results => this.setState({ results })
+			setResults: results => this.setState({ results }),
+			clearResults: () => this.setState({ results: [] })
 		}
     }
      
     
     fetchResults(query) {
         this.setState({loading: true})
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/products?name=${query}`)
-        .then(res => res.json())
-        .then(res => {
-            this.setState({
-                loading: false,
-                results: res["hydra:member"]
-             })             
+        clearTimeout(this.state.timeout)
+        this.setState({
+            timeout: setTimeout(() => {
+                fetch(`${process.env.REACT_APP_API_BASE_URL}/products?name=${query}`)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.setState({
+                            loading: false,
+                            results: res["hydra:member"]
+                        })
+                    })
+            }, 500)
         })
     }
 

@@ -5,8 +5,6 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 
-import { Shop } from '@material-ui/icons';
-
 import System from '../3d/solar-system'
 import PivotSphere from '../3d/pivot-sphere-planets'
 import Controls from '../3d/controls'
@@ -19,7 +17,7 @@ function Content(props) {
 	const globalState = useContext(store);
 	const { dispatch } = globalState;
 	useEffect(() => {
-		dispatch({ type: "loadingShops", category_id: props.category_id })
+		dispatch({ type: "loadingShops", history: props.history, category_id: props.category_id })
 		fetch(`${process.env.REACT_APP_API_BASE_URL}/shops?category=${props.category_id}`)
 			.then(res => res.json())
 			.then(res => {
@@ -50,7 +48,7 @@ export default function (props) {
 			resize={{ scroll: false }}
 		>
 			<GalaxyProvider>
-				<Content category_id={props.category_id} />
+				<Content history={props.history} category_id={props.category_id} />
 			</GalaxyProvider>
 		</Canvas>
 	)

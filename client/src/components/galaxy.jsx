@@ -8,15 +8,14 @@ import PivotSphere from '../3d/pivot-sphere-solar'
 
 import { store, GalaxyProvider } from '../store/GalaxyProvider';
 
-function Content() {
+function Content(props) {
 	const globalState = useContext(store);
 	const { dispatch } = globalState;
 	useEffect(() => {
-		dispatch({ type: "loadingCategories" })
+		dispatch({ type: "loadingCategories", history: props.history })
 		fetch(`${process.env.REACT_APP_API_BASE_URL}/categories`)
 			.then(res => res.json())
 			.then(res => {
-				console.log(res)
 				dispatch({ type: "categoriesLoaded", categories: res["hydra:member"] })
 			})
 	}, [])
@@ -34,7 +33,7 @@ function Content() {
 	}
 }
 
-export default function () {
+export default function (props) {
 
 	return (
 		<Canvas
@@ -44,7 +43,7 @@ export default function () {
 			resize={{ scroll: false }}
 		>
 			<GalaxyProvider>
-				<Content />
+				<Content history={props.history} />
 			</GalaxyProvider>
 		</Canvas>
 	)

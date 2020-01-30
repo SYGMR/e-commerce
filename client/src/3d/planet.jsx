@@ -1,6 +1,5 @@
 import React, { useContext, useRef } from 'react';
 import { Dom } from "react-three-fiber";
-import * as THREE from "three";
 
 import { store } from '../store/GalaxyProvider';
 
@@ -14,18 +13,16 @@ export default function Planet(props) {
   const { dispatch, state } = globalState;
   const ref = useRef()
 
-  var texturesList = [
-    '/img/planetTexture/2k_jupiter.jpg',
-    '.img/planetTexture/2k_mars.jpg',
-    '/img/planetTexture/2k_saturn.jpg',
-    '/img/planetTexture/2k_venus_atmosphere.jpg',
-    '/img/planetTexture/2k_mercury.jpg'
+  // var texturesList = [
+  //   '/img/planetTexture/2k_jupiter.jpg',
+  //   '.img/planetTexture/2k_mars.jpg',
+  //   '/img/planetTexture/2k_saturn.jpg',
+  //   '/img/planetTexture/2k_venus_atmosphere.jpg',
+  //   '/img/planetTexture/2k_mercury.jpg'
 
-  ];
-  var randIndex = getRandomInt(0, texturesList.length - 1);
-
-  var randTexture = new THREE.TextureLoader().load(texturesList[randIndex]);
-  const dom = useRef()
+  // ];
+  // var randIndex = getRandomInt(0, texturesList.length - 1);
+  // var randTexture = new THREE.TextureLoader().load(texturesList[randIndex]);
   return (
     <mesh rotation-y={Math.PI / 2}
       ref={ref}
@@ -45,7 +42,7 @@ export default function Planet(props) {
           e.preventDefault(); //will stop the link href to call the blog page
 
           setTimeout(function () {
-            window.location.href = '/category/' + state.category_id + '/shop/' + props.shop_id; //will redirect to your blog page (an ex: blog.html)
+            state.history.push('/category/' + state.category_id + '/shop/' + props.shop_id)
           }, 700); //will call the function after 2 secs.
 
         }}

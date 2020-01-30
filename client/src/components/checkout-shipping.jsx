@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {CheckoutContext} from '../store/CheckoutProvider'
-import { Field, reduxForm } from 'redux-form'
 
 export default class Shipping extends Component {
 
@@ -9,7 +8,7 @@ export default class Shipping extends Component {
     constructor(props, context) {
       super(props, context)
       this.state = {
-        shippingType: "relais"
+        courier: "relais"
       }
     }
  
@@ -33,9 +32,9 @@ export default class Shipping extends Component {
               Relais
               <input
               id="relais"
-              checked={this.state.shippingType === 'relais'} 
+              checked={this.state.courier === 'relais'} 
               onChange={this.handleChange.bind(this)}
-              name="shippingType" 
+              name="courier" 
               type="radio" 
               value="relais" />
             </label>
@@ -44,9 +43,9 @@ export default class Shipping extends Component {
               Standard
               <input 
               id="standard"
-              checked={this.state.shippingType === 'standard'} 
+              checked={this.state.courier === 'standard'} 
               onChange={this.handleChange.bind(this)}
-              name="shippingType" 
+              name="courier" 
               type="radio" 
               value="standard" />
             </label>
@@ -55,9 +54,9 @@ export default class Shipping extends Component {
               Express
               <input
               id="express"
-              checked={this.state.shippingType === 'express'} 
+              checked={this.state.courier === 'express'} 
               onChange={this.handleChange.bind(this)}
-              name="shippingType" 
+              name="courier" 
               type="radio" 
               value="express" />
             </label>

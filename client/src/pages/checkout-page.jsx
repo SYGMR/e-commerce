@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import CheckoutProvider, {CheckoutContext} from "../store/CheckoutProvider"
-import CustomerInformation from '../components/order-customer';
-import Shipping from '../components/order-shipping'
-import Total from '../components/order-total'
+import CustomerInformation from '../components/checkout-customer';
+import Shipping from '../components/checkout-shipping'
+import Total from '../components/checkout-total'
 
 class CheckoutPage extends Component {
 
