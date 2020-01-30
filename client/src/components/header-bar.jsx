@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {clearAuth} from '../actions/auth';
 import {Link} from 'react-router-dom';
+import  Search from './search';
 
 export class HeaderBar extends React.Component {
 
@@ -15,8 +16,11 @@ export class HeaderBar extends React.Component {
 		return	(
 			<div className="header-bar">
 				<Link to="/"><h1 id="logo">UNIVERSHOP</h1></Link>
+				<Search />
+
+				
 				<ul>
-					<li><Link to="/cart"><img src="/SVG/basket.svg" className="icon" alt="#" /><small style={{color: 'red'}}>({/* this.props.cart.filter((item, index, self) => {
+				<li><Link to="/cart"><img src="/SVG/basket.svg" className="icon" alt="#" /><small style={{color: 'red'}}>({/* this.props.cart.filter((item, index, self) => {
 						let findIndex = self.findIndex(itemB => item.id === itemB.id)
 						return findIndex === index
 					}) */this.props.cart.length})</small></Link><span>Panier</span></li>

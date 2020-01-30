@@ -104,7 +104,6 @@ canvas {
   padding: 0px 30px;
   position: relative;
   z-index: 999;
-  overflow: hidden;
 }
 
 .header-bar ul{
@@ -295,6 +294,11 @@ canvas {
   margin: 5px 10px;
 }
 
+img.icon.delete_product {
+    position: absolute;
+    right: 0;
+    top: 30px;
+}
 /*************************************/
 /***********   CATEGORY    ***********/
 /*************************************/

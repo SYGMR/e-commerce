@@ -53,7 +53,7 @@ class CartItem extends React.Component {
                         type: "DELETE_PRODUCT",
                         product: this.props.product
                     })
-                }} className="icon" alt='#'/>
+                }} className="icon delete_product" alt='#'/>
                 <br></br>
                 <img src="/SVG/house.svg" onClick={() => {
                      this.props.dispatch({
