@@ -24,3 +24,54 @@ export const registerUser = user => dispatch => {
 			}
 		});
 };
+
+export const registerCustomer = customer => (dispatch, getState) => {
+	const authToken = getState().auth.token;
+	console.log(customer);
+	return fetch(`${process.env.REACT_APP_API_BASE_URL}/customers`, {
+		method: 'POST',
+		headers: {
+			'content-type': 'application/json',
+			Authorization: `Bearer ${authToken}`
+		},
+		body: JSON.stringify(customer)
+	})
+		.then(res => normalizeResponseErrors(res))
+		.then(res => res.json())
+		.catch(err => {
+			const {reason, message, location} = err;
+			if (reason === 'ValidationError') {
+				// Convert ValidationErrors into SubmissionErrors for Redux Form
+				return Promise.reject(
+					new SubmissionError({
+						[location]: message
+					})
+				);
+			}
+		});
+};
+
+export const registerCard = card => (dispatch, getState) => {
+	const authToken = getState().auth.token;
+	return fetch(`${process.env.REACT_APP_API_BASE_URL}/customers`, {
+		method: 'POST',
+		headers: {
+			'content-type': 'application/json',
+			Authorization: `Bearer ${authToken}`
+		},
+		body: JSON.stringify(card)
+	})
+		.then(res => normalizeResponseErrors(res))
+		.then(res => res.json())
+		.catch(err => {
+			const {reason, message, location} = err;
+			if (reason === 'ValidationError') {
+				// Convert ValidationErrors into SubmissionErrors for Redux Form
+				return Promise.reject(
+					new SubmissionError({
+						[location]: message
+					})
+				);
+			}
+		});
+};
