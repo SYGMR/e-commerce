@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
-import  Galaxy  from './galaxy_fiber';
 import CategoriesPages from './categories-page';
 
 class  LandingPage extends React.Component{
