@@ -163,7 +163,7 @@ function Content({ data, addCart }) {
         <section id="productList">
             {data.map(({ product }) => (
             <div key={product.id} class="containerProductList">
-                <img src="" style={{width: 100, height: 100}} alt={product.name} />
+                <img src='https://fakeimg.pl/100x100/282828/F2F4F3' style={{width: 100, height: 100}} alt={product.name} />
                 <h2><Link to={`/product/${product.id}`}>{product.name}</Link></h2>
                 <p>{product.description}</p>
                 <h3>{product.price} &euro;</h3>

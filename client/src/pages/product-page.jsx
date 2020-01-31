@@ -70,6 +70,7 @@ class ProductPage extends React.Component {
                 <h4>{product.description}</h4>
                 <h4>{product.price}</h4>
                 <h4>{product.images}</h4>
+                <h4>{console.log(product.images)}</h4>
                 <button className="addToCart" onClick={() => this.addCart(product)}>Ajouter au panier</button>
                 </div>
             ))

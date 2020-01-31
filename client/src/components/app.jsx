@@ -14,37 +14,38 @@ import ShopPage from '../pages/shop-page';
 import DetailsProduct from '../pages/product-page';
 import CartPage from '../pages/cart-page'
 import CheckoutPage from '../pages/checkout-page'
+import OrdersPage from '../pages/orders-page'
 
 import {refreshAuthToken} from '../actions/auth';
 
 export class App extends React.Component {
 		componentDidUpdate(prevProps) {
 				if (!prevProps.loggedIn && this.props.loggedIn) {
-						// When we are logged in, refresh the auth token periodically
-						this.startPeriodicRefresh();
+					// When we are logged in, refresh the auth token periodically
+					this.startPeriodicRefresh();
 				} else if (prevProps.loggedIn && !this.props.loggedIn) {
-						// Stop refreshing when we log out
-						this.stopPeriodicRefresh();
+					// Stop refreshing when we log out
+					this.stopPeriodicRefresh();
 				}
 		}
 
 		componentWillUnmount() {
-				this.stopPeriodicRefresh();
+			this.stopPeriodicRefresh();
 		}
 
 		startPeriodicRefresh() { // FIXME React admin might need some glue to work with this
-				this.refreshInterval = setInterval(
-						() => this.props.dispatch(refreshAuthToken()),
-						60 * 60 * 1000 // One hour
-				);
+			this.refreshInterval = setInterval(
+					() => this.props.dispatch(refreshAuthToken()),
+					60 * 60 * 1000 // One hour
+			);
 		}
 
 		stopPeriodicRefresh() {
-				if (!this.refreshInterval) {
-						return;
-				}
+			if (!this.refreshInterval) {
+					return;
+			}
 
-				clearInterval(this.refreshInterval);
+			clearInterval(this.refreshInterval);
 		}
 
 		render() {
@@ -63,6 +64,7 @@ export class App extends React.Component {
 									<Route exact path="/product/:product_id" component={DetailsProduct} />
 									<Route exact path="/cart" component={CartPage} />
 									<Route exact path="/checkout" component={CheckoutPage} />
+									<Route exact path="/orders" component={OrdersPage} />
 									<Route><div>404 Not found</div></Route>
 								</Switch>
 							</React.Fragment>
