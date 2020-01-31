@@ -33,8 +33,8 @@ export default class CustomerInformation extends React.Component {
     render() {
         return (
             <form onSubmit={this.postData.bind(this)}>
-                <div class="container">
-                <div class="info">
+                <div className="container">
+                <div className="info">
                     {/** MODIF */}
                     <label for="firstname">Prenom</label>
                     <input value={this.state.firstname} onChange={this.handleChange.bind(this)} name="firstname" id="firstname" type="text"/>
@@ -43,10 +43,10 @@ export default class CustomerInformation extends React.Component {
                     <label for="address">Adresse</label>
                     <input value={this.state.address} onChange={this.handleChange.bind(this)} name="address" id="address" type="text"/>
                     </div>
-                    <div class="card__container">
-                        <div class="card">
-                            <div class="row credit">
-                                <div class="left">
+                    <div className="card__container">
+                        <div className="card">
+                            <div className="row credit">
+                                <div className="left">
 
 
                                     <label for="cd">Debit/ Credit Card</label>
@@ -54,15 +54,15 @@ export default class CustomerInformation extends React.Component {
 
 
                                 </div>
-                                <div class="right">
+                                <div className="right">
                                     {/* <img src="http://i66.tinypic.com/5knfq8.png" alt="visa" />
                                     <img src="http://i67.tinypic.com/14y4p1.png" alt="mastercard" />
                                     <img src="http://i63.tinypic.com/1572ot1.png" alt="amex" />
                                     <img src="http://i64.tinypic.com/2i92k4p.png" alt="maestro" /> */}
                                 </div>
                             </div>
-                            <div class="row cardholder">
-                                <div class="info">
+                            <div className="row cardholder">
+                                <div className="info">
 
 
                                     {/** MODIF */}
@@ -71,8 +71,8 @@ export default class CustomerInformation extends React.Component {
 
                                 </div>
                             </div>
-                            <div class="row number">
-                                <div class="info">
+                            <div className="row number">
+                                <div className="info">
 
 
                                     {/** MODIF */}
@@ -84,8 +84,8 @@ export default class CustomerInformation extends React.Component {
 
                                 </div>
                             </div>
-                            <div class="row details">
-                                <div class="left">
+                            <div className="row details">
+                                <div className="left">
                                     <label for="expiry-date">Expiry</label>
 
 
@@ -132,7 +132,7 @@ export default class CustomerInformation extends React.Component {
 
 
                                 </div>
-                                <div class="right">
+                                <div className="right">
 
 
                                     {/** MODIF */}
@@ -147,7 +147,7 @@ export default class CustomerInformation extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div class="button">
+                    <div className="button">
 
 
                         {/** MODIF */}
