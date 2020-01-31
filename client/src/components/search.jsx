@@ -38,7 +38,11 @@ export default class Search extends Component {
             <div ref={ref => this.mount = ref} id="containerSearch">
                 <SearchProvider>
                     <SearchBar />
-                    {this.state.showResults === true && <SearchResults /> }
+                    {this.state.showResults === true && <SearchResults hideResults={() => {
+                        this.setState({
+                            showResults: false
+                        })
+                    }} /> }
                 </SearchProvider>
             </div>
         )

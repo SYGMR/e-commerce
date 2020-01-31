@@ -12,7 +12,7 @@ export default class SearchResults extends Component {
                 return (
                     <div ref={this.mount} className="resultSearchBar">
                         {this.context.results.map(result =>
-                            <SearchResult {...result} />
+                            <SearchResult hideResults={this.props.hideResults} {...result} />
                         )}
                     </div>
                 )

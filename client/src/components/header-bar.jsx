@@ -31,7 +31,7 @@ export class HeaderBar extends React.Component {
 						),
 						<>
 							<li><Link to="/dashboard"><img src="/SVG/dashboard.svg" className="icon" alt="#" /></Link><span>Dashboard</span></li>
-							<li> onClick={() => this.logOut()}><img src="/SVG/logout.svg" className="icon" id="logout" alt="#" /><span>Logout</span></li>
+							<li onClick={() => this.logOut()}><img src="/SVG/logout.svg" className="icon" id="logout" alt="#" /><span>Logout</span></li>
 						</>
 					]
 					}

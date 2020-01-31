@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-
-
+import { SearchContext } from '../store/SearchProvider'
 
 class SearchResult extends Component {
+
+    static contextType = SearchContext
 
     constructor(props) {
         super(props)
@@ -23,7 +24,7 @@ class SearchResult extends Component {
             <div className="SearchResultItem">
                 <img style={{ marginRight: 15, marginLeft: 5, borderRadius: 15 }} src='https://fakeimg.pl/80x80/282828/F2F4F3' alt="" />
                 <div>
-                    <h4><Link to={`/product/${id}`}>{name}</Link></h4>
+                    <h4><Link onClick={this.props.hideResults} to={`/product/${id}`}>{name}</Link></h4>
                     <p style={{ fontSize: '0.7rem', textAlign: "justify", margin: "5px 0 11px" }}>{description}</p>
                     <div >
                         <p style={{ float: "left" }}>{price} &euro;</p>
