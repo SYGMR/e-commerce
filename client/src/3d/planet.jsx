@@ -23,29 +23,29 @@ export default function Planet(props) {
   // ];
   // var randIndex = getRandomInt(0, texturesList.length - 1);
   // var randTexture = new THREE.TextureLoader().load(texturesList[randIndex]);
+
+  const handleClick = (event) => {
+    if (typeof event.preventDefault !== "undefined") {
+      event.preventDefault(); //will stop the link href to call the blog page
+    }
+    state.position.setFromMatrixPosition(ref.current.matrixWorld);
+    dispatch({ type: "zoom", zoom: true })
+    setTimeout(function () {
+      state.history.push('/category/' + state.category_id + '/shop/' + props.shop_id)
+    }, 700); //will call the function after 2 secs.
+  }
+
   return (
     <mesh rotation-y={Math.PI / 2}
       ref={ref}
-      onClick={e => {
-        state.position.setFromMatrixPosition(ref.current.matrixWorld);
-        dispatch({ type: "zoom", zoom: true })
-      }}
+      onClick={handleClick}
       {...props}
 
     >
       <sphereGeometry attach="geometry" args={[getRandomInt(20, 40), 20, 30]} />
       <meshLambertMaterial attach="material" color='grey' />
       <Dom>
-        <div onClick={e => {
-          state.position.setFromMatrixPosition(ref.current.matrixWorld);
-          dispatch({ type: "zoom", zoom: true })
-          e.preventDefault(); //will stop the link href to call the blog page
-
-          setTimeout(function () {
-            state.history.push('/category/' + state.category_id + '/shop/' + props.shop_id)
-          }, 700); //will call the function after 2 secs.
-
-        }}
+        <div onClick={handleClick}
           style={{ cursor: 'pointer' }} className="content-planet-sdauhsdayudash">
           <a className="categories">{props.shop_name}</a>
         </div>

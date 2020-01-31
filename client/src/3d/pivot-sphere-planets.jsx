@@ -21,7 +21,7 @@ export default function PivotSphere(props) {
       <mesh ref={ref} position={[0, 1, 0]} rotation-x={Math.PI / 2}>
         <planeBufferGeometry attach="geometry" args={[1, 1, 1]} />
         {state.shops.map(shop => (
-          <Planet shop_id={shop.id} shop_name={shop.name} position={[randomIntFromInterval(400, -400), randomIntFromInterval(400, -400), 0]} {...props} />
+          <Planet key={shop.id} shop_id={shop.id} shop_name={shop.name} position={[randomIntFromInterval(400, -400), randomIntFromInterval(400, -400), 0]} {...props} />
         ))}
       </mesh>
     </group>
