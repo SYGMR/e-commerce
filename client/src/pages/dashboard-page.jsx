@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import requiresLogin from '../components/requires-login';
 // import {fetchProtectedData} from '../actions/protected-data';
@@ -19,7 +20,8 @@ export class DashboardPage extends React.Component {
 				</div>
 {/*				<div className="dashboard-protected-data">
 					Protected data: {this.props.protectedData}
-				</div>*/}
+		</div>*/}
+		<Link to='/orders'>Orders</Link>
 			</div>
 		);
 	}
