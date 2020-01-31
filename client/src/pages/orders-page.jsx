@@ -1,6 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { CheckoutContext } from '../store/CheckoutProvider'
+import requiresLogin from '../components/requires-login';
+import { connect } from 'react-redux';
+
 
 class OrdersPage extends React.Component {
 
@@ -40,4 +42,8 @@ class OrdersPage extends React.Component {
 }
 
 
-export default OrdersPage;
+const mapStateToProps = state => ({
+	loggedIn: state.auth.currentUser !== null
+});
+
+export default requiresLogin()(connect(mapStateToProps)(OrdersPage));
