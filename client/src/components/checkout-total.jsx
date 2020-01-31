@@ -9,7 +9,12 @@ class Total extends React.Component {
 
     confirm(event) {   
         event.preventDefault()
-        alert("Coming soon")
+        let orders = JSON.parse(localStorage.getItem("orders"))
+        if(orders === null) {
+            orders = []
+        }
+        orders.push(this.context)
+        localStorage.setItem("orders", JSON.stringify(orders))
     }
 
     render() {
