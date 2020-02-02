@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_GET_PERMISSIONS, AUTH_CHECK } from 'react-admin';
-
 import { Redirect } from 'react-router-dom';
 
 import {connect} from 'react-redux';
@@ -32,9 +30,7 @@ import UsersIcon from '@material-ui/icons/Group';
 
 import * as UsersGuesser from '../components/users-guesser';
 
-import {clearAuth} from '../actions/auth';
-
-const entrypoint = process.env.REACT_APP_API_BASE_URL;
+const entrypoint = "/api";
 const fetchHydra = (url, options = {}) => baseFetchHydra(url, {
 		...options,
 		headers: new Headers({'Authorization': `Bearer ${localStorage.getItem('token')}`}),
@@ -61,28 +57,6 @@ const apiDocumentationParser = entrypoint => parseHydraDocumentation(entrypoint,
 				},
 		);
 
-const authProvider = function(type, params) {
-	if (type === AUTH_LOGIN) {
-	 
-	}
-	if (type === AUTH_LOGOUT) {
-		this.props.dispatch(clearAuth());
-		localStorage.removeItem("token")
-		localStorage.removeItem("refreshToken")
-		return Promise.resolve();
-	}
-	if (type === AUTH_ERROR) {
-		// ...
-	}
-	if (type === AUTH_CHECK) {
-		return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
-	}
-	if (type === AUTH_GET_PERMISSIONS) { // TODO
-		return Promise.resolve(this.props.roles);
-	}
-	return Promise.reject('Unknown method');
-};
-
 const dataProvider = baseDataProvider(entrypoint, fetchHydra, apiDocumentationParser);
 
 export class AdminPage extends React.Component {
@@ -95,7 +69,6 @@ export class AdminPage extends React.Component {
 				loginPage={false}
 				apiDocumentationParser={ apiDocumentationParser }
 				dataProvider={ dataProvider }
-				authProvider={ authProvider.bind(this) }
 				entrypoint={ entrypoint }
 			>
 				<ResourceGuesser name="carts" 
