@@ -3,7 +3,7 @@ import {SubmissionError} from 'redux-form';
 import {normalizeResponseErrors} from './utils';
 
 export const registerUser = user => dispatch => {
-	return fetch(`${process.env.REACT_APP_API_BASE_URL}/users`, {
+	return fetch(`/api/users`, {
 		method: 'POST',
 		headers: {
 			'content-type': 'application/json'
@@ -27,7 +27,7 @@ export const registerUser = user => dispatch => {
 
 export const registerCustomer = customer => (dispatch, getState) => {
 	const authToken = getState().auth.token;
-	return fetch(`${process.env.REACT_APP_API_BASE_URL}/customers`, {
+	return fetch(`/api/customers`, {
 		method: 'POST',
 		headers: {
 			'content-type': 'application/json',
@@ -52,7 +52,7 @@ export const registerCustomer = customer => (dispatch, getState) => {
 
 export const registerCard = card => (dispatch, getState) => {
 	const authToken = getState().auth.token;
-	return fetch(`${process.env.REACT_APP_API_BASE_URL}/customers`, {
+	return fetch(`/api/customers`, {
 		method: 'POST',
 		headers: {
 			'content-type': 'application/json',
